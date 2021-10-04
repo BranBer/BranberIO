@@ -1,0 +1,120 @@
+@import "_base.scss";
+@import url("https://fonts.googleapis.com/css2?family=Shrikhand&display=swap");
+
+$blob-count: 16;
+@keyframes stretch {
+  0% {
+    transform: scale(1, 1);
+  }
+  50% {
+    transform: scale(0.85, 1.1);
+  }
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@for $i from 1 to $blob-count + 1 {
+  @keyframes float#{$i} {
+    $startpos: random(200) - 200;
+    $endpos: $startpos * -1;
+    $wobble: 10%;
+
+    0% {
+      top: #{$startpos + "%"};
+      transform: translateX($wobble * -1);
+    }
+
+    25% {
+      transform: translateX($wobble);
+    }
+
+    50% {
+      transform: translateX($wobble * -1);
+    }
+
+    75% {
+      transform: translateX($wobble);
+    }
+
+    100% {
+      top: #{$endpos + "%"};
+      transform: translateX($wobble * -1);
+    }
+  }
+}
+
+@for $n from 1 to $blob-count {
+  @keyframes morph#{$n} {
+    @for $i from 1 to 101 {
+      $tl: (random(60) + 70) + "%";
+      $tr: (random(60) + 70) + "%";
+      $bl: (random(60) + 70) + "%";
+      $br: (random(60) + 70) + "%";
+      $tl2: (random(60) + 70) + "%";
+      $tr2: (random(60) + 70) + "%";
+      $bl2: (random(60) + 70) + "%";
+      $br2: (random(60) + 70) + "%";
+
+      #{$i}% {
+        border-radius: #{$tl}
+          #{$tr}
+          #{$bl}
+          #{$br} /
+          #{$tl2}
+          #{$tr2}
+          #{$bl2}
+          #{$br2};
+      }
+    }
+  }
+}
+
+.page {
+  background: radial-gradient(transparent, black);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+}
+
+.lava {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: hidden;
+  background: $primary-color;
+  padding: 0;
+  margin: 0;
+  top: 0;
+  left: 0;
+  border-radius: 0;
+  filter: blur(20px) contrast(30);
+}
+
+.blob {
+  display: block;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  background-color: black;
+  border-radius: 50%;
+}
+
+@for $i from 1 through $blob-count + 1 {
+  $rdim: random(300) + 5;
+  $rdur: 200 + "s";
+  $rdurfloat: (random(45) + 25) + "s";
+  $leftpos: random(100) + "vw";
+  .blob:nth-child(#{$i}) {
+    width: #{$rdim}px;
+    height: #{$rdim}px;
+
+    left: #{$leftpos};
+    animation: morph#{$i} #{$rdur} alternate-reverse linear infinite,
+      float#{$i} #{$rdurfloat} alternate-reverse linear infinite,
+      stretch #{$rdur} alternate-reverse linear infinite;
+  }
+}

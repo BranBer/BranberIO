@@ -1,0 +1,165 @@
+@import "_base.scss";
+
+$orbital-count: 15;
+
+:export {
+  orbitalCount: $orbital-count;
+}
+
+@for $i from 1 through $orbital-count {
+  $rand: random(360);
+  $rand-end: $rand + 360;
+  @keyframes rotate#{$i} {
+    from {
+      transform: rotate($rand + deg);
+    }
+
+    to {
+      transform: rotate(#{$rand + 360}deg);
+    }
+  }
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.pageContainer {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.page {
+  width: 70vw;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(1, 1, 1, 0.9);
+  row-gap: 1em;
+  color: $primary-color;
+
+  h2 {
+    font-size: 9vw;
+    font-weight: lighter;
+    margin: 0;
+  }
+
+  hr {
+    border-color: $primary-color;
+    width: 50%;
+  }
+
+  p {
+    width: 75%;
+    font-size: 20px;
+    text-align: center;
+  }
+}
+
+$social-media-icon-count: 3;
+
+.socialMediaContainer {
+  display: grid;
+  grid-template-columns: repeat($social-media-icon-count, 1fr);
+  align-self: center;
+  width: 30%;
+  min-width: #{$social-media-icon-count * 3}em;
+  column-gap: 1em;
+  height: 3em;
+  max-height: 3em;
+
+  .icon {
+    font-size: 2em;
+    transition: font-size 0.25s ease;
+    align-self: center;
+    justify-self: center;
+    &:hover {
+      cursor: pointer;
+      font-size: 3em;
+    }
+  }
+}
+
+.profilePic {
+  position: absolute;
+  width: 25vw;
+  height: 25vw;
+  background-image: radial-gradient(transparent 40%, $primary-color),
+    url("/static/images/brandon.jpg");
+  background-blend-mode: hard-light;
+  background-size: cover;
+  background-position: 100% 50%;
+  border-radius: 500px;
+}
+
+$half-circle-dim: 25vw;
+$half-circle-incr: 3px;
+$half-circle-count: 0;
+
+.profilePicContainer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 20em;
+  margin-bottom: calc(#{$orbital-count} * #{$half-circle-incr + 1});
+  margin-top: calc(#{$orbital-count} * #{$half-circle-incr + 1});
+}
+
+@while $half-circle-count < $orbital-count {
+  $half-circle-dim: calc(#{$half-circle-dim} + #{$half-circle-incr});
+
+  .halfCircle#{$half-circle-count} {
+    position: absolute;
+    width: $half-circle-dim;
+    height: $half-circle-dim;
+    border-radius: 50%;
+    border: 2px solid $primary-color;
+    border-bottom-color: transparent;
+    border-left-color: transparent;
+    animation-duration: #{random(35) + 5}s;
+  }
+
+  $half-circle-count: $half-circle-count + 1;
+}
+
+.halfCircle {
+  position: absolute;
+  width: 20vw;
+  height: 20vw;
+  border-radius: 50%;
+  border: 2px solid $primary-color;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  animation-duration: #{random(35) + 5}s;
+}
+
+.background {
+  position: absolute;
+  background-image: url("/static/images/hubbleNebulaMandala.png");
+  background-position: center;
+  background-size: cover;
+  animation-name: slide;
+  animation-duration: 360s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  left: -25vw;
+  top: -75vw;
+  width: 250vw;
+  height: 250vw;
+}

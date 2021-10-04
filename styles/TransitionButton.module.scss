@@ -1,0 +1,70 @@
+//_base.scss
+@import "base";
+
+.transitionButton {
+  padding: 8px 12px;
+  border: none;
+  position: relative;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  transition: background-color 1s ease;
+  font-size: 1.75vw;
+
+  color: $primary-color;
+  cursor: pointer;
+  background-color: transparent;
+
+  &:hover {
+    .topWall,
+    .botWall {
+      transform: translateX(0%);
+    }
+
+    .leftWall,
+    .rightWall {
+      transform: translateY(0%);
+    }
+  }
+}
+
+.wall {
+  background-color: $primary-color;
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  transition: transform 0.5s linear;
+}
+
+.horWall {
+  width: 120%;
+  height: 3px;
+}
+
+.verWall {
+  height: 120%;
+  width: 4px;
+}
+
+.topWall {
+  top: 0;
+  left: 0;
+  transform: translateX(-120%);
+}
+
+.botWall {
+  bottom: 0;
+  right: 0;
+  transform: translateX(120%);
+}
+
+.leftWall {
+  left: 0;
+  top: 0;
+  transform: translateY(-120%);
+}
+
+.rightWall {
+  right: 0;
+  bottom: 0;
+  transform: translateY(120%);
+}
