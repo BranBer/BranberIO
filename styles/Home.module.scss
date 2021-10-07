@@ -1,6 +1,9 @@
 @import "_base.scss";
 
 $orbital-count: 15;
+$half-circle-dim: 35%;
+$half-circle-incr: 3px;
+$half-circle-count: 0;
 
 :export {
   orbitalCount: $orbital-count;
@@ -29,47 +32,6 @@ $orbital-count: 15;
   }
 }
 
-.pageContainer {
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-}
-
-.page {
-  width: 70vw;
-  height: 100%;
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  background: rgba(1, 1, 1, 0.9);
-  row-gap: 1em;
-  color: $primary-color;
-
-  h2 {
-    font-size: 9vw;
-    font-weight: lighter;
-    margin: 0;
-  }
-
-  hr {
-    border-color: $primary-color;
-    width: 50%;
-  }
-
-  p {
-    width: 75%;
-    font-size: 20px;
-    text-align: center;
-  }
-}
-
 $social-media-icon-count: 3;
 
 .socialMediaContainer {
@@ -79,25 +41,42 @@ $social-media-icon-count: 3;
   width: 30%;
   min-width: #{$social-media-icon-count * 3}em;
   column-gap: 1em;
-  height: 3em;
+  height: 6em;
   max-height: 3em;
+  margin-top: calc($orbital-count * $half-circle-incr * 0.5);
 
-  .icon {
-    font-size: 2em;
-    transition: font-size 0.25s ease;
+  a {
     align-self: center;
     justify-self: center;
-    &:hover {
-      cursor: pointer;
-      font-size: 3em;
+
+    .icon {
+      font-size: 2em;
+      transition: transform 0.25s ease;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.2);
+      }
     }
   }
 }
 
+.profilePicContainer {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: #{$half-circle-dim};
+  width: 100%;
+  margin-bottom: calc(#{$orbital-count} * #{$half-circle-incr + 1});
+  margin-top: calc(#{$orbital-count} * #{$half-circle-incr + 1});
+}
+
 .profilePic {
   position: absolute;
-  width: 25vw;
-  height: 25vw;
+  width: $half-circle-dim;
+  padding-bottom: $half-circle-dim;
   background-image: radial-gradient(transparent 40%, $primary-color),
     url("/static/images/brandon.jpg");
   background-blend-mode: hard-light;
@@ -106,28 +85,13 @@ $social-media-icon-count: 3;
   border-radius: 500px;
 }
 
-$half-circle-dim: 25vw;
-$half-circle-incr: 3px;
-$half-circle-count: 0;
-
-.profilePicContainer {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  height: 20em;
-  margin-bottom: calc(#{$orbital-count} * #{$half-circle-incr + 1});
-  margin-top: calc(#{$orbital-count} * #{$half-circle-incr + 1});
-}
-
 @while $half-circle-count < $orbital-count {
   $half-circle-dim: calc(#{$half-circle-dim} + #{$half-circle-incr});
 
   .halfCircle#{$half-circle-count} {
     position: absolute;
     width: $half-circle-dim;
-    height: $half-circle-dim;
+    padding-bottom: $half-circle-dim;
     border-radius: 50%;
     border: 2px solid $primary-color;
     border-bottom-color: transparent;
@@ -140,8 +104,8 @@ $half-circle-count: 0;
 
 .halfCircle {
   position: absolute;
-  width: 20vw;
-  height: 20vw;
+  width: $half-circle-dim;
+  padding-bottom: $half-circle-dim;
   border-radius: 50%;
   border: 2px solid $primary-color;
   border-bottom-color: transparent;

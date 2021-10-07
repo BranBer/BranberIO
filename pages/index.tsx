@@ -1,14 +1,10 @@
 import type { NextPage } from "next";
-import Head from "next/head";
-import Image from "next/image";
 import styles from "../styles/Home.module.scss";
-import TransitionButton from "../components/transitionButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faFacebookSquare,
   faGithubSquare,
   faLinkedin,
-  faTwitterSquare,
 } from "@fortawesome/free-brands-svg-icons";
 import NavBar from "../components/navBar";
 import Lavalamp from "../components/lavalamp";
@@ -70,9 +66,32 @@ const Home: NextPage = () => {
           </div>
 
           <div className={styles.socialMediaContainer}>
-            <FontAwesomeIcon icon={faFacebookSquare} className={styles.icon} />
-            <FontAwesomeIcon icon={faGithubSquare} className={styles.icon} />
-            <FontAwesomeIcon icon={faLinkedin} className={styles.icon} />
+            <a
+              href="https://www.facebook.com/brandon.berke.3/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FontAwesomeIcon
+                icon={faFacebookSquare}
+                className={styles.icon}
+              />
+            </a>
+
+            <a
+              href="https://github.com/BranBer"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FontAwesomeIcon icon={faGithubSquare} className={styles.icon} />
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/brandon-berke-84111b199/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <FontAwesomeIcon icon={faLinkedin} className={styles.icon} />
+            </a>
           </div>
 
           <NavBar />

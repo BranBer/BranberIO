@@ -1,0 +1,106 @@
+@import "_base.scss";
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 10px 3px $primary-color;
+  }
+
+  25% {
+    box-shadow: 0 0 15px 4px $primary-color;
+  }
+
+  50% {
+    box-shadow: 0 0 10px 3px $primary-color;
+  }
+
+  75% {
+    box-shadow: 0 0 15px 4px $primary-color;
+  }
+
+  100% {
+    box-shadow: 0 0 10px 3px $primary-color;
+  }
+}
+
+.projectsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  row-gap: 2em;
+  column-gap: 2em;
+
+  width: 90%;
+  height: 90%;
+  overflow-y: scroll;
+
+  padding: 2em;
+  &::-webkit-scrollbar {
+    width: 0.3em;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: $primary-color;
+  }
+}
+
+.projectContainer {
+  width: 30%;
+  padding-bottom: 30%;
+  height: 0;
+  border: 2px solid $primary-color;
+  position: relative;
+  transition: transform 0.5s ease;
+
+  .projectOverlay {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+    //box-shadow: 0 0 10px 4px $primary-color;
+    animation: glow 10s linear infinite alternate-reverse;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    .projectOverlay {
+      visibility: visible;
+      opacity: 1;
+      transition: opacity 0.4s ease-in-out, visibility 0.4s ease-in-out;
+    }
+  }
+}
+
+.projectTags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  column-gap: 0.25em;
+  row-gap: 0.25em;
+}
+.projectTag {
+  background: rgba(0, 0, 0, 0.5);
+  border: $primary-color;
+  color: $primary-color;
+  text-align: center;
+  padding: 0.25em;
+  border: 1px solid $primary-color;
+}

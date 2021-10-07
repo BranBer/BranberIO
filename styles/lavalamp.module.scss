@@ -99,7 +99,8 @@ $blob-count: 16;
   position: absolute;
   width: 100px;
   height: 100px;
-  background-color: black;
+  background: black;
+  mix-blend-mode: multiply;
   border-radius: 50%;
 }
 

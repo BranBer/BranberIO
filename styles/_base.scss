@@ -1,6 +1,48 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 
-$primary-color: blue;
+$primary-color: yellow;
 $secondary-color: turquoise;
 $ternary-color: purple;
 $background-color: black;
+
+.pageContainer {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: "Roboto";
+}
+
+.page {
+  width: 70vw;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(1, 1, 1, 0.9);
+  row-gap: 1em;
+  color: $primary-color;
+
+  h2 {
+    font-size: 9vw;
+    font-weight: lighter;
+    margin: 0;
+  }
+
+  hr {
+    border-color: $primary-color;
+    width: 50%;
+  }
+
+  p {
+    width: 75%;
+    font-size: 20px;
+    text-align: center;
+  }
+}
