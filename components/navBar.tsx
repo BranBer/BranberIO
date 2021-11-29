@@ -1,6 +1,7 @@
 import React from "react";
 import TransitionButton from "./transitionButton";
 import styles from "../styles/NavBar.module.scss";
+import Link from "next/link";
 
 const NavOptions = [
   {
@@ -10,7 +11,7 @@ const NavOptions = [
   },
   {
     text: "Projects",
-    href: "",
+    href: "projects",
     onClick: () => {},
   },
   {
@@ -30,17 +31,26 @@ const NavOptions = [
   },
 ];
 
+// const ForwardedTransitionButton = React.forwardRef(
+//   (props, ref) => (
+//   <TransitionButton ref={ref} {...props} />
+// ));
+
 const NavBar = () => {
   return (
     <div className={styles.NavBarContainer}>
       {NavOptions.map((option, index) => {
+        console.log(option.href);
         return (
-          <TransitionButton
-            text={option.text}
-            href={option.href}
-            onClick={option.onClick}
-            key={`NavOption${option.text}${index}`}
-          />
+          <Link key={`navLink${index}`} passHref href={option.href}>
+            <a>
+              <TransitionButton
+                text={option.text}
+                onClick={option.onClick}
+                key={`NavOption${option.text}${index}`}
+              />
+            </a>
+          </Link>
         );
       })}{" "}
     </div>
