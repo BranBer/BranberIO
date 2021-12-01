@@ -8,9 +8,12 @@ import {
 
 const getClient = (uri: string) => {
   return new ApolloClient({
-    uri: uri,
+    uri: uri + "/graphql",
     cache: new InMemoryCache(),
   });
 };
 
-export default getClient;
+console.log(process.env.api_url);
+const client = getClient(process.env.api_url!);
+
+export default client;
