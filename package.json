@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "next start --openssl-legacy-provider",
     "lint": "next lint"
   },
   "dependencies": {
@@ -16,9 +16,9 @@
     "@fortawesome/react-fontawesome": "^0.1.15",
     "@reduxjs/toolkit": "^1.6.2",
     "graphql": "^16.0.1",
-    "next": "11.1.2",
-    "react": "17.0.2",
-    "react-dom": "17.0.2",
+    "next": "^12.0.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-multicolor-circular-progress-bar": "^1.0.3",
     "sass": "^1.41.1",
     "styled-components": "^5.3.1"
