@@ -22,7 +22,7 @@ const Projects = ({ projects }: any) => {
               <div className={styles.projectOverlay}>
                 <h3>{project.name}</h3>
                 <div className={styles.projectTags}>
-                  {/* {project.tags.map((tag: string, tIndex: number) => {
+                  {project.tags.map((tag: string, tIndex: number) => {
                     return (
                       <div
                         key={`project${pIndex}tag${tIndex}`}
@@ -31,7 +31,7 @@ const Projects = ({ projects }: any) => {
                         {tag}
                       </div>
                     );
-                  })} */}
+                  })}
                 </div>
               </div>
             </div>

@@ -5,4 +5,5 @@ export default interface project {
   repoLink: string;
   projectLink: string;
   images: string[];
+  tags: string[];
 }
