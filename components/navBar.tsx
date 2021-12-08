@@ -3,8 +3,6 @@ import TransitionButton from "./transitionButton";
 import styles from "../styles/NavBar.module.scss";
 import Link from "next/link";
 
-
-
 const NavBar = () => {
   const NavOptions = [
     {
@@ -30,6 +28,11 @@ const NavBar = () => {
     {
       text: "Contact",
       href: "/",
+      onClick: () => {},
+    },
+    {
+      text: "Login",
+      href: "/login",
       onClick: () => {},
     },
   ];
