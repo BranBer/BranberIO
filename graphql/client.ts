@@ -1,9 +1,6 @@
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
-  useQuery,
-  gql,
 } from "@apollo/client";
 
 const getClient = (uri: string) => {
@@ -13,7 +10,6 @@ const getClient = (uri: string) => {
   });
 };
 
-console.log(process.env.api_url);
 const client = getClient(process.env.api_url!);
 
 export default client;

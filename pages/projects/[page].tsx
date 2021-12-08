@@ -59,6 +59,7 @@ Projects.getInitialProps = async ({ query }: NextPageContext) => {
     page: +(query.page as string),
     size: +process.env.projects_per_page!,
   };
+
   let { loading, error, data } = await client.query({
     query: getProjects,
     variables: params,
