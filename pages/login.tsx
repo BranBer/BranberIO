@@ -16,14 +16,15 @@ const Login : NextPage = () => {
 
                     <form className = {styles.loginForm}>  
 
-                        <div className = {styles.loginField}>
-                            <label>Email</label>
-                            <input type="text"/>
-                        </div>
-
-                        <div className = {styles.loginField}>
-                            <label>Password</label>
-                            <input type="password"/>
+                        <div className={styles.fields}>
+                            <div className = {styles.loginField}>
+                                <label htmlFor="email">Email</label>
+                                <input type="text" id="email"/>
+                            </div>
+                            <div className = {styles.loginField}>
+                                <label htmlFor="password">Password</label>
+                                <input type="password" id="password" className={styles.sqPass}/>
+                            </div>
                         </div>
 
                         <input type="submit"/>
@@ -31,9 +32,13 @@ const Login : NextPage = () => {
                         <div className = {styles.errorMessage} style={{height: '30px'}}>
                             
                         </div>
+
+                        
                     </form>
 
-                    
+                    <div className = {styles.loginWith}>
+
+                        </div>
                 </div>
             </div>
         </div>
