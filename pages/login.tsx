@@ -5,7 +5,6 @@ import NavBar from "../components/navBar";
 
 const Login : NextPage = () => {
     return <> 
-        <Lavalamp/>
         <div className={styles.pageContainer}>
             <div className={styles.loginPage}>
                 

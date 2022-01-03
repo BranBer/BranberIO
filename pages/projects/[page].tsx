@@ -43,7 +43,6 @@ const Projects = ({ projects }: any) => {
 
   return (
     <>
-      <Lavalamp />
       <div className={styles.pageContainer}>
         <div className={styles.page}>
           <h2>Projects</h2>

@@ -56,7 +56,6 @@ const Home: NextPage = () => {
 
   return (
     <>
-      <Lavalamp />
       <div className={styles.pageContainer}>
         <div className={styles.page}>
           <h2>BRANBER.IO</h2>
