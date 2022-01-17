@@ -44,10 +44,11 @@ const NavBar = () => {
           <Link key={`navLink${index}`} passHref href={option.href}>
             <a>
               <TransitionButton
-                text={option.text}
                 onClick={option.onClick}
                 key={`NavOption${option.text}${index}`}
-              />
+              >
+                {option.text}
+              </TransitionButton>
             </a>
           </Link>
         );

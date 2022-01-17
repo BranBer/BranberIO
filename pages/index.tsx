@@ -7,8 +7,7 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import NavBar from "../components/navBar";
-import Lavalamp from "../components/lavalamp";
-import Link from 'next/link';
+
 
 interface ICircleStyle {
   dim: number;

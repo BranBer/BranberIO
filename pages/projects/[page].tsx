@@ -4,6 +4,7 @@ import Lavalamp from "../../components/lavalamp";
 import getProjects from "../../graphql/queries/project";
 import client from "../../graphql/client";
 import Project from "../../types/project";
+import NavBar from "../../components/navBar";
 
 const Projects = ({ projects }: any) => {
   const RenderProjects = () => {
@@ -46,6 +47,7 @@ const Projects = ({ projects }: any) => {
       <div className={styles.pageContainer}>
         <div className={styles.page}>
           <h2>Projects</h2>
+          <NavBar/>
           {RenderProjects()}
         </div>
       </div>

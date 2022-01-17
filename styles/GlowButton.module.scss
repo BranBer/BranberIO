@@ -1,0 +1,20 @@
+@import "_base.scss";
+
+$hover-transition-time: 0.25s;
+
+.glowButton {
+  background-color: rgba(0, 0, 0, 1);
+  border: 1px solid $primary-color;
+  color: $primary-color;
+  padding: 5px;
+  border-radius: 10px;
+  transition: box-shadow $hover-transition-time linear,
+    transform $hover-transition-time linear;
+  box-shadow: 0;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 0 0 5px 1px $primary-color;
+    transform: scale(1.1);
+  }
+}
