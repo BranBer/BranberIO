@@ -8,6 +8,7 @@ import { GetServerSideProps } from "next";
 import GlowButton from "../components/glowButton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
+import { faGoogle } from "@fortawesome/free-brands-svg-icons";
 
 const Login = ({ providers }: { providers: Provider[] }) => {
   const { data: session } = useSession();
@@ -22,43 +23,36 @@ const Login = ({ providers }: { providers: Provider[] }) => {
             </div>
 
             <div className={styles.loginContent}>
-              <form className={styles.loginForm}>
-                <div className={styles.fields}>
-                  <div className={styles.loginField}>
-                    <label htmlFor="email">Email</label>
-                    <input type="text" id="email" />
-                  </div>
-                  <div className={styles.loginField}>
-                    <label htmlFor="password">Password</label>
-                    <input
-                      type="password"
-                      id="password"
-                      className={styles.sqPass}
-                    />
-                  </div>
-                </div>
+              {providers &&
+                Object.values(providers).map((provider) => {
+                  let providerIcon = null;
 
-                <input type="submit" />
+                  switch (provider.name.toLowerCase()) {
+                    case "google":
+                      providerIcon = faGoogle;
+                      break;
+                    case "facebook":
+                      providerIcon = faFacebook;
+                      break;
+                  }
 
-                <div
-                  className={styles.errorMessage}
-                  style={{ height: "30px" }}
-                ></div>
-              </form>
-
-              <div className={styles.loginWith}>
-                {providers &&
-                  Object.values(providers).map((provider) => (
-                    <div key={provider.name}>
-                      <GlowButton onClick={() => signIn(provider.id)}>
-                        <div className={styles.providerButtonContent}>
-                          <FontAwesomeIcon icon={faFacebook} />
-                          <span>Sign in with {provider.name} </span>
-                        </div>
-                      </GlowButton>
-                    </div>
-                  ))}
-              </div>
+                  return (
+                    <GlowButton
+                      onClick={() => signIn(provider.id)}
+                      key={provider.name}
+                    >
+                      <div className={styles.providerButtonContent}>
+                        {providerIcon && (
+                          <FontAwesomeIcon
+                            icon={providerIcon}
+                            className={styles.providerIcon}
+                          />
+                        )}
+                        <span>Sign in with {provider.name} </span>
+                      </div>
+                    </GlowButton>
+                  );
+                })}
             </div>
           </div>
         </div>

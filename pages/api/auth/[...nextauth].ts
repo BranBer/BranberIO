@@ -1,5 +1,6 @@
 import NextAuth from "next-auth";
 import FacebookProvider from "next-auth/providers/facebook";
+import GoogleProvider from "next-auth/providers/google";
 
 export default NextAuth({
   pages: {
@@ -9,6 +10,10 @@ export default NextAuth({
     FacebookProvider({
       clientId: process.env.facebook_client_id!,
       clientSecret: process.env.facebook_secret!,
+    }),
+    GoogleProvider({
+      clientId: process.env.google_client_id!,
+      clientSecret: process.env.google_secret!,
     }),
   ],
   callbacks: {

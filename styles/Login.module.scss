@@ -10,13 +10,14 @@
 }
 
 .tab {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(0, 0, 0, 1);
   padding: 20px 0 20px 0;
   width: 100%;
   border-radius: 50px 50px 0 0;
   display: flex;
   justify-content: center;
 }
+
 .loginContainer {
   width: 50%;
   height: 100%;
@@ -28,12 +29,17 @@
 
 .loginContent {
   width: 100%;
-  background-color: black;
-  height: 50%;
+  background: linear-gradient(black, rgba(0, 0, 0, 0));
+  height: 25%;
   display: flex;
   flex-direction: column;
+  row-gap: 1.25em;
   justify-content: center;
   align-items: center;
+
+  button {
+    width: 35%;
+  }
 }
 
 .loginForm {
@@ -128,4 +134,8 @@
   display: flex;
   align-items: center;
   column-gap: 1em;
+
+  .providerIcon {
+    font-size: 2em;
+  }
 }
