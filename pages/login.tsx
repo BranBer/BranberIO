@@ -38,7 +38,7 @@ const Login = ({ providers }: { providers: Provider[] }) => {
 
                   return (
                     <GlowButton
-                      onClick={() => signIn(provider.id)}
+                      onClick={() => signIn(provider.id, { callbackUrl: "/" })}
                       key={provider.name}
                     >
                       <div className={styles.providerButtonContent}>

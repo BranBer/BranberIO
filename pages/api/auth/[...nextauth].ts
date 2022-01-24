@@ -22,13 +22,13 @@ export default NextAuth({
   callbacks: {
     async signIn(provider) {
       let { user, account, profile, email, credentials } = provider;
-      // console.log("PROVIDER");
-      // console.log(provider);
-      // console.log("PROFILE");
-      // console.log(profile);
-      // console.log("\n");
-      // console.log("ACCOUNT");
-      // console.log(account);
+      console.log("PROVIDER");
+      console.log(provider);
+      console.log("PROFILE");
+      console.log(profile);
+      console.log("\n");
+      console.log("ACCOUNT");
+      console.log(account);
 
       return true;
     },
@@ -64,6 +64,12 @@ export default NextAuth({
       session.accessToken = token.accessToken;
 
       return session;
+    },
+    redirect({ url, baseUrl }) {
+      if (url.startsWith(baseUrl)) return url;
+      // Allows relative callback URLs
+      else if (url.startsWith("/")) return new URL(url, baseUrl).toString();
+      return baseUrl;
     },
   },
 });
