@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import Lavalamp from "../components/lavalamp";
 import styles from "../styles/Login.module.scss";
 import NavBar from "../components/navBar";
@@ -61,7 +61,7 @@ const Login = ({ providers }: { providers: Provider[] }) => {
   );
 };
 
-const getServerSideProps: GetServerSideProps = async (context) => {
+const getStaticProps: GetStaticProps = async (context) => {
   const providers = await getProviders();
 
   return {
@@ -70,4 +70,4 @@ const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default Login;
-export { getServerSideProps };
+export { getStaticProps };

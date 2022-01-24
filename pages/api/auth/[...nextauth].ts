@@ -19,10 +19,25 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    async signIn({ user, account, profile, email, credentials }) {
+    async signIn(provider) {
+      let { user, account, profile, email, credentials } = provider;
+      console.log("PROVIDER");
+      console.log(provider);
+      console.log("PROFILE");
+      console.log(profile);
+      console.log("\n");
+      console.log("ACCOUNT");
+      console.log(account);
+
       return true;
     },
-    async jwt({ token, account, user, profile }) {
+    async jwt(args) {
+      let { token, account, user, profile } = args;
+
+      // console.log("ARGS");
+      // console.log(args);
+      // console.log("\n");
+
       if (account) {
         token.accessToken = account.access_token;
 
@@ -35,10 +50,10 @@ export default NextAuth({
             picture: profile.picture,
           };
 
-          let { data } = await client.mutate({
-            mutation: LOGIN_GOOGLE,
-            variables: params,
-          });
+          // let { data } = await client.mutate({
+          //   mutation: LOGIN_GOOGLE,
+          //   variables: params,
+          // });
         }
       }
 
