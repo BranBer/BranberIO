@@ -61,7 +61,7 @@ const Login = ({ providers }: { providers: Provider[] }) => {
   );
 };
 
-const getStaticProps: GetStaticProps = async (context) => {
+const getServerSideProps: GetServerSideProps = async (context) => {
   const providers = await getProviders();
 
   return {
@@ -70,4 +70,4 @@ const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export default Login;
-export { getStaticProps };
+export { getServerSideProps };
