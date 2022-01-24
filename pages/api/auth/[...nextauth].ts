@@ -8,6 +8,7 @@ export default NextAuth({
   pages: {
     signIn: "/login",
   },
+  secret: process.env.NEXTAUTH_SECRET,
   providers: [
     FacebookProvider({
       clientId: process.env.facebook_client_id!,
@@ -21,13 +22,13 @@ export default NextAuth({
   callbacks: {
     async signIn(provider) {
       let { user, account, profile, email, credentials } = provider;
-      console.log("PROVIDER");
-      console.log(provider);
-      console.log("PROFILE");
-      console.log(profile);
-      console.log("\n");
-      console.log("ACCOUNT");
-      console.log(account);
+      // console.log("PROVIDER");
+      // console.log(provider);
+      // console.log("PROFILE");
+      // console.log(profile);
+      // console.log("\n");
+      // console.log("ACCOUNT");
+      // console.log(account);
 
       return true;
     },
