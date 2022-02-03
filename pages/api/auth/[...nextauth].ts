@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
 import client from "../../../graphql/client";
-import LOGIN_GOOGLE from "../../../graphql/mutations/auth";
+import { LOGIN_FACEBOOK, LOGIN_GOOGLE } from "../../../graphql/mutations/auth";
 
 export default NextAuth({
   pages: {
@@ -28,26 +28,44 @@ export default NextAuth({
     async jwt(args) {
       let { token, account, user, profile } = args;
 
-      console.log("ARGS");
-      console.log(args);
-      console.log("\n");
-
       if (account) {
         token.accessToken = account.access_token;
 
         if (profile && user) {
-          let params = {
-            email: profile.email as string,
-            aud: profile.aud as string,
-            idToken: account.id_token as string,
-            displayName: profile.name as string,
-            picture: profile.picture,
-          };
+          let params = {};
 
-          // let { data } = await client.mutate({
-          //   mutation: LOGIN_GOOGLE,
-          //   variables: params,
-          // });
+          if (account.provider) {
+            let mutation = null;
+
+            switch (account.provider) {
+              case "google":
+                mutation = LOGIN_GOOGLE;
+                params = {
+                  email: profile.email as string,
+                  aud: profile.aud as string,
+                  idToken: account.id_token as string,
+                  displayName: profile.name as string,
+                  picture: profile.picture,
+                };
+                break;
+              case "facebook":
+                mutation = LOGIN_FACEBOOK;
+                params = {
+                  email: token.email as string,
+                  inputToken: token.access_token as string,
+                  displayName: token.name as string,
+                  picture: token.picture as string,
+                };
+                break;
+            }
+
+            if (mutation) {
+              let { data } = await client.mutate({
+                mutation: mutation,
+                variables: params,
+              });
+            }
+          }
         }
       }
 
