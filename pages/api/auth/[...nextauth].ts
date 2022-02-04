@@ -22,11 +22,16 @@ export default NextAuth({
   callbacks: {
     async signIn(provider) {
       let { user, account, profile, email, credentials } = provider;
+      console.log("provider");
+      console.log(provider);
 
       return true;
     },
     async jwt(args) {
       let { token, account, user, profile } = args;
+
+      console.log("ARGS");
+      console.log(args);
 
       if (account) {
         token.accessToken = account.access_token;
