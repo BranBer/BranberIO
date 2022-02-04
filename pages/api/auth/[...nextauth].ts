@@ -66,7 +66,7 @@ export default NextAuth({
 
             if (mutation) {
               let { data } = await client.mutate({
-                mutation: LOGIN_GOOGLE,
+                mutation: mutation,
                 variables: params,
               });
             }
@@ -88,4 +88,5 @@ export default NextAuth({
       return baseUrl;
     },
   },
+  debug: true,
 });
