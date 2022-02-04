@@ -65,6 +65,7 @@ export default NextAuth({
             }
 
             if (mutation) {
+              console.log("MUTATING");
               let { data } = await client.mutate({
                 mutation: mutation,
                 variables: params,
