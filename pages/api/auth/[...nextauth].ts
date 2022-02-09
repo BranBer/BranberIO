@@ -54,7 +54,7 @@ export default NextAuth({
                 };
                 break;
               case "facebook":
-                //mutation = LOGIN_FACEBOOK;
+                mutation = LOGIN_FACEBOOK;
                 params = {
                   email: token.email as string,
                   inputToken: token.access_token as string,
@@ -64,14 +64,13 @@ export default NextAuth({
                 break;
             }
 
-            // if (mutation) {
-            //   //The issue is here!!!
-            //   console.log("MUTATING");
-            //   let { data } = await client.mutate({
-            //     mutation: mutation,
-            //     variables: params,
-            //   });
-            // }
+            if (mutation) {
+              console.log("MUTATING");
+              let { data } = await client.mutate({
+                mutation: mutation,
+                variables: params,
+              });
+            }
           }
         }
       }
