@@ -23,7 +23,7 @@ const LOGIN_FACEBOOK = gql`
     $email: String!
     $inputToken: String!
     $displayName: String!
-    $picture: String!
+    $picture: String
   ) {
     loginFacebook(
       email: $email
