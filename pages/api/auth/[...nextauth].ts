@@ -57,7 +57,7 @@ export default NextAuth({
                 mutation = LOGIN_FACEBOOK;
                 params = {
                   email: token.email as string,
-                  inputToken: token.access_token as string,
+                  inputToken: token.accessToken as string,
                   displayName: token.name as string,
                   picture: token.picture as string,
                 };
