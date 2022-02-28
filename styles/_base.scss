@@ -51,3 +51,23 @@ $background-color: black;
   color: red;
   font-weight: bolder;
 }
+
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 10px;
+    opacity: 0.5;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    width: 10px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-left: 5px solid $primary-color;
+    opacity: 0.5;
+    //border: 1px solid $primary-color;
+  }
+}
