@@ -12,7 +12,7 @@ const NavBar = () => {
     },
     {
       text: "Projects",
-      href: "/projects/1",
+      href: "/projects",
       onClick: () => {},
     },
     {

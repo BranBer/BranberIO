@@ -1,10 +1,7 @@
-import type { NextPage, NextPageContext } from "next";
-import styles from "../../styles/Projects.module.scss";
-import Lavalamp from "../../components/lavalamp";
-import getProjects from "../../graphql/queries/project";
-import client from "../../graphql/client";
-import Project from "../../types/project";
-import NavBar from "../../components/navBar";
+import styles from "../styles/Projects.module.scss";
+import Project from "../types/project";
+import projectsData from "../data/projects";
+import NavBar from "../components/navBar";
 
 const Projects = ({ projects }: any) => {
   const RenderProjects = () => {
@@ -12,13 +9,13 @@ const Projects = ({ projects }: any) => {
       <div className={styles.projectsContainer}>
         {projects.map((project: Project, pIndex: number) => {
           let background = project.images
-            ? `url(${process.env.api_url + project.images[0]})`
+            ? `url(${project.images[0]})`
             : "black";
           return (
             <div
               key={`Project${pIndex}`}
               className={styles.projectContainer}
-              style={{ background: background }}
+              style={{ background: background, backgroundSize: "cover" }}
             >
               <div className={styles.projectOverlay}>
                 <h3>{project.name}</h3>
@@ -47,7 +44,7 @@ const Projects = ({ projects }: any) => {
       <div className={styles.pageContainer}>
         <div className={styles.page}>
           <h2>Projects</h2>
-          <NavBar/>
+          <NavBar />
           {RenderProjects()}
         </div>
       </div>
@@ -55,18 +52,8 @@ const Projects = ({ projects }: any) => {
   );
 };
 
-Projects.getInitialProps = async ({ query }: NextPageContext) => {
-  let params: { page: number; size: number } = {
-    page: +(query.page as string),
-    size: +process.env.projects_per_page!,
-  };
-
-  let { loading, error, data } = await client.query({
-    query: getProjects,
-    variables: params,
-  });
-
-  return { projects: data.projects };
+Projects.getInitialProps = async () => {
+  return { projects: projectsData };
 };
 
 export default Projects;

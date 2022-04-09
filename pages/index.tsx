@@ -8,7 +8,6 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 import NavBar from "../components/navBar";
 
-
 interface ICircleStyle {
   dim: number;
   dur: number;
@@ -99,5 +98,12 @@ const Home: NextPage = () => {
     </>
   );
 };
+
+// Home.getInitialProps(({req, res}) => {
+
+//   return {props: {
+//     accessToken: ""
+//   }}
+// });
 
 export default Home;
