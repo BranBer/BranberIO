@@ -1,4 +1,5 @@
 export default interface project {
+  id: string;
   name: string;
   description: string;
   repoLink: string;

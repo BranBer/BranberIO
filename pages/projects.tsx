@@ -2,6 +2,7 @@ import styles from "../styles/Projects.module.scss";
 import Project from "../types/project";
 import projectsData from "../data/projects";
 import NavBar from "../components/navBar";
+import Link from "next/link";
 
 const Projects = ({ projects }: any) => {
   const RenderProjects = () => {
@@ -31,6 +32,9 @@ const Projects = ({ projects }: any) => {
                     );
                   })}
                 </div>
+                <Link href={`/projects/${project.id}`} passHref>
+                  <button className={styles.generalButton}>Read More</button>
+                </Link>
               </div>
             </div>
           );
