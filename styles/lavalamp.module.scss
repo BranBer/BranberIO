@@ -71,27 +71,28 @@ $blob-count: 16;
 }
 
 .page {
-  background: radial-gradient(transparent, black);
+  background: $primary-color;
+  box-shadow: inset 0 0 50px 0 black;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   border-radius: 0;
+  overflow: hidden;
 }
 
 .lava {
   height: 100%;
   width: 100%;
   position: absolute;
-  overflow: hidden;
-  background: $primary-color;
+  overflow: visible;
+  z-index: 0;
   padding: 0;
   margin: 0;
   top: 0;
   left: 0;
   border-radius: 0;
-  filter: blur(20px) contrast(30);
 }
 
 .blob {
