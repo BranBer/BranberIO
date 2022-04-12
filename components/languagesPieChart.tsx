@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import { ResponsivePie, PieTooltipProps } from "@nivo/pie";
+import { ResponsivePie } from "@nivo/pie";
 import styles from "../styles/languagesPieChart.module.scss";
 interface languagesPieChartProps {
   owner: string;
@@ -12,10 +12,6 @@ interface languagePieChartDatum {
   label: string;
   value: number;
 }
-
-const PieChartTooltip: React.FC<languagePieChartDatum[]> = (props) => {
-  return <></>;
-};
 
 const LanguagesPieChart: React.FC<languagesPieChartProps> = ({
   owner,
