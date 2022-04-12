@@ -5,6 +5,26 @@ $secondary-color: turquoise;
 $ternary-color: purple;
 $background-color: black;
 
+@mixin scrollbar {
+  &::-webkit-scrollbar {
+    width: 10px;
+    opacity: 0.5;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: transparent;
+    width: 10px;
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    border-left: 5px solid $primary-color;
+    opacity: 0.5;
+    //border: 1px solid $primary-color;
+  }
+}
+
 .pageContainer {
   width: 100vw;
   height: 100vh;
@@ -18,16 +38,19 @@ $background-color: black;
 }
 
 .page {
+  @include scrollbar;
+
   width: 70vw;
   height: 100%;
   position: absolute;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   background: rgba(1, 1, 1, 0.9);
   row-gap: 1em;
   color: $primary-color;
+  overflow-y: scroll;
 
   h2 {
     font-size: 9vw;
@@ -36,7 +59,9 @@ $background-color: black;
   }
 
   hr {
-    border-color: $primary-color;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid $primary-color;
     width: 50%;
   }
 
@@ -64,25 +89,5 @@ $background-color: black;
 
   &:hover {
     transform: scale(1.1);
-  }
-}
-
-@mixin scrollbar {
-  &::-webkit-scrollbar {
-    width: 10px;
-    opacity: 0.5;
-  }
-
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: transparent;
-    width: 10px;
-  }
-
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    border-left: 5px solid $primary-color;
-    opacity: 0.5;
-    //border: 1px solid $primary-color;
   }
 }
