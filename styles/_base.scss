@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 
-$primary-color: yellow;
+$primary-color: #ff976b;
 $secondary-color: turquoise;
 $ternary-color: purple;
 $background-color: black;
@@ -84,7 +84,7 @@ $background-color: black;
   color: black;
 
   transition: transform 0.25s ease;
-  padding: 2px 4px;
+  padding: 4px 6px;
   cursor: pointer;
 
   &:hover {

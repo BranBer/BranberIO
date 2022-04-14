@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import styles from "../styles/Carousel.module.scss";
@@ -6,6 +7,7 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import Modal from "./modal";
 
 interface CarouselProps {
   images: string[];
@@ -14,6 +16,7 @@ interface CarouselProps {
 const Carousel: React.FC<CarouselProps> = ({ images }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const [modalOpen, setModalOpen] = useState(false);
   const carouselVariants = {
     enter: (direction: number) => {
       return {
@@ -52,46 +55,63 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
   };
 
   return (
-    <div className={styles.carouselContainer}>
-      <div className={styles.carouselControls}>
-        <div
-          className={styles.carouselButtonLeft}
-          onClick={handleClickLeftControl}
-        >
-          <FontAwesomeIcon icon={faChevronLeft} className={styles.direction} />
+    <>
+      <div className={styles.carouselContainer}>
+        <div className={styles.carouselControls}>
+          <div
+            className={styles.carouselButtonLeft}
+            onClick={handleClickLeftControl}
+          >
+            <FontAwesomeIcon
+              icon={faChevronLeft}
+              className={styles.carouselDirection}
+            />
+          </div>
+
+          <div
+            className={styles.carouselButtonRight}
+            onClick={handleClickRightControl}
+          >
+            <FontAwesomeIcon
+              icon={faChevronRight}
+              className={styles.carouselDirection}
+            />
+          </div>
         </div>
 
-        <div
-          className={styles.carouselButtonRight}
-          onClick={handleClickRightControl}
-        >
-          <FontAwesomeIcon icon={faChevronRight} className={styles.direction} />
-        </div>
+        <AnimatePresence custom={direction} exitBeforeEnter>
+          <motion.img
+            className={styles.carouselImage}
+            onClick={() => setModalOpen(true)}
+            key={images[currentImageIndex]}
+            src={`url(${images[currentImageIndex]})`}
+            style={{
+              background: `url(${images[currentImageIndex]})`,
+              backgroundSize: "contain",
+              backgroundPosition: "center",
+            }}
+            custom={direction}
+            variants={carouselVariants}
+            animate="center"
+            exit="exit"
+            initial="enter"
+            transition={{
+              ease: "linear",
+              duration: 0.25,
+            }}
+          />
+          ) );
+        </AnimatePresence>
       </div>
-
-      <AnimatePresence custom={direction} exitBeforeEnter>
-        <motion.img
-          className={styles.carouselImage}
-          key={images[currentImageIndex]}
-          src={`url(${images[currentImageIndex]})`}
-          style={{
-            background: `url(${images[currentImageIndex]})`,
-            backgroundSize: "contain",
-            backgroundPosition: "center",
-          }}
-          custom={direction}
-          variants={carouselVariants}
-          animate="center"
-          exit="exit"
-          initial="enter"
-          transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            duration: 0.2,
-          }}
+      <Modal visible={modalOpen} onClose={() => setModalOpen(false)}>
+        <img
+          className={styles.projectImageFull}
+          alt="current project image"
+          src={images[currentImageIndex]}
+          style={{ objectFit: "contain" }}
         />
-        ) );
-      </AnimatePresence>
-    </div>
+      </Modal>
+    </>
   );
 };
 
