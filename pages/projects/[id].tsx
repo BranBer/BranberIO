@@ -4,6 +4,9 @@ import project from "../../types/project";
 import styles from "../../styles/Projects.module.scss";
 import Carousel from "../../components/carousel";
 import dynamic from "next/dynamic";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 interface projectRouteQuery {
   id: string;
@@ -23,17 +26,41 @@ const Project = ({ project }: { project: project }) => {
         <div className={styles.page}>
           <h2>{project.name}</h2>
           <NavBar />
-          <Carousel images={project.images} />
           <hr />
-          <div className={styles.projectDescription}>
-            <p>{project.description}</p>
+          <Carousel images={project.images} />
+          <div className={styles.projectLinks}>
+            {project.repo && project.repo.link && (
+              <a href={project.repo.link} target="_blank" rel="noreferrer">
+                <div className={styles.projectLink}>
+                  <FontAwesomeIcon icon={faGithub} />
+                  <span>Visit Repo</span>
+                </div>
+              </a>
+            )}
+
+            {project.projectLink && (
+              <a href={project.repo.link} target="_blank" rel="noreferrer">
+                <div className={styles.projectLink}>
+                  <FontAwesomeIcon icon={faGlobe} />
+                  <span>Visit Site</span>
+                </div>
+              </a>
+            )}
+          </div>
+          <hr />
+          <div className={styles.projectDescriptionContainer}>
+            <div className={styles.projectDescription}>
+              <p>{project.description}</p>
+            </div>
           </div>
 
           <hr />
+          <h3>Project Languages</h3>
           <LanguagesPieChart
             owner={project.repo.owner}
             repo={project.repo.repo}
           />
+          <hr />
         </div>
       </div>
     </>

@@ -10,7 +10,7 @@ interface languagesPieChartProps {
 interface languagePieChartDatum {
   id: string;
   label: string;
-  value: number;
+  value: string;
 }
 
 const LanguagesPieChart: React.FC<languagesPieChartProps> = ({
@@ -20,27 +20,33 @@ const LanguagesPieChart: React.FC<languagesPieChartProps> = ({
   const [data, setData] = useState<languagePieChartDatum[]>([]);
 
   useEffect(() => {
-    fetch(`https://api.github.com/repos/${owner}/${repo}/languages`).then(
-      (res) => {
-        if (res && res.body) {
-          const resData = Object.entries(res.body);
+    fetch(`https://api.github.com/repos/${owner}/${repo}/languages`)
+      .then((res) => res.text())
+      .then((res) => {
+        if (res) {
+          const resData = Object.entries(JSON.parse(res));
           let languageData = [];
 
+          let totalBytes: number = 0;
+
+          resData.forEach(([_, value]) => {
+            totalBytes += value as number;
+          });
+
           for (let [language, bytes] of resData) {
-            languageData.push({
-              id: language,
-              label: language,
-              value: bytes,
-            });
+            const datum: languagePieChartDatum = {
+              id: language as string,
+              label: language as string,
+              value: (((bytes as number) / totalBytes) * 100).toFixed(2),
+            };
+            languageData.push(datum);
           }
 
           setData(languageData);
         }
-      }
-    );
+      });
   }, []);
 
-  console.log(data);
   return (
     <div className={styles.languagesPieChartWrapper}>
       <div className={styles.languagesPieChartWrapper}>
@@ -53,6 +59,7 @@ const LanguagesPieChart: React.FC<languagesPieChartProps> = ({
             activeOuterRadiusOffset={8}
             colors={{ scheme: "yellow_orange_brown" }}
             borderWidth={2}
+            valueFormat={(value) => `${value}%`}
             borderColor={{
               from: "color",
               modifiers: [["darker", 0.9]],
@@ -75,6 +82,23 @@ const LanguagesPieChart: React.FC<languagesPieChartProps> = ({
                 },
               },
             }}
+            legends={[
+              {
+                anchor: "bottom",
+                direction: "row",
+                justify: false,
+                translateX: 0,
+                translateY: 56,
+                itemsSpacing: 0,
+                itemWidth: 100,
+                itemHeight: 18,
+                itemTextColor: "#999",
+                itemDirection: "left-to-right",
+                itemOpacity: 1,
+                symbolSize: 18,
+                symbolShape: "circle",
+              },
+            ]}
           />
         </div>
       </div>
