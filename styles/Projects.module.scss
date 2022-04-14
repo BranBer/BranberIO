@@ -26,6 +26,18 @@
   hr {
     width: 70%;
   }
+
+  .generalButton {
+    margin-bottom: 20px;
+    font-size: 16px;
+  }
+
+  h3 {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    font-size: 26px;
+  }
 }
 .projectsContainer {
   display: flex;
@@ -85,7 +97,7 @@
       margin: 0;
       padding: 0;
       height: auto;
-      font-size: 28px;
+      font-size: 30px;
     }
   }
 
