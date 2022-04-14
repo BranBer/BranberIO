@@ -1,0 +1,58 @@
+@import "./_base.scss";
+
+.modalBackground {
+  background-color: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 400;
+  overflow: hidden;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.modalContainer {
+  position: absolute;
+  pointer-events: none;
+
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 400;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.modalContent {
+  background-color: $primary-color;
+  z-index: 500;
+  //width: fit-content;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: all;
+  padding: 5px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.closeModal {
+  width: 20px;
+  height: 20px;
+  color: $primary-color;
+  cursor: pointer;
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(125%, -98%);
+}
