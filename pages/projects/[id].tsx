@@ -6,7 +6,8 @@ import Carousel from "../../components/carousel";
 import dynamic from "next/dynamic";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
 
 interface projectRouteQuery {
   id: string;
@@ -61,6 +62,11 @@ const Project = ({ project }: { project: project }) => {
             repo={project.repo.repo}
           />
           <hr />
+          <Link passHref href="/projects">
+            <button className={styles.generalButton}>
+              <FontAwesomeIcon icon={faArrowLeft} /> Back to projects..
+            </button>
+          </Link>
         </div>
       </div>
     </>
