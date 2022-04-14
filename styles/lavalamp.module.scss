@@ -90,9 +90,8 @@ $blob-count: 16;
   z-index: 0;
   padding: 0;
   margin: 0;
-  top: 0;
-  left: 0;
-  border-radius: 0;
+  top: -20%;
+  left: -20%;
 }
 
 .blob {
@@ -101,7 +100,6 @@ $blob-count: 16;
   width: 100px;
   height: 100px;
   background: black;
-  mix-blend-mode: multiply;
   border-radius: 50%;
 }
 
