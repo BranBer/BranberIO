@@ -17,7 +17,7 @@ const NavBar = () => {
     },
     {
       text: "Skills",
-      href: "/",
+      href: "/skills",
       onClick: () => {},
     },
     {
@@ -28,11 +28,6 @@ const NavBar = () => {
     {
       text: "Contact",
       href: "/",
-      onClick: () => {},
-    },
-    {
-      text: "Login",
-      href: "/login",
       onClick: () => {},
     },
   ];
