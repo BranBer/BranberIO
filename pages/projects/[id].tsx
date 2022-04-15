@@ -1,4 +1,3 @@
-import NavBar from "../../components/navBar";
 import projectsData from "../../data/projects";
 import project from "../../types/project";
 import styles from "../../styles/Projects.module.scss";
@@ -8,6 +7,7 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
+import PageHeader from "../../components/pageHeader";
 
 interface projectRouteQuery {
   id: string;
@@ -25,8 +25,7 @@ const Project = ({ project }: { project: project }) => {
     <>
       <div className={styles.pageContainer}>
         <div className={styles.page}>
-          <h2>{project.name}</h2>
-          <NavBar />
+          <PageHeader text={project.name} />
           <hr />
           <Carousel images={project.images} />
           <div className={styles.projectLinks}>

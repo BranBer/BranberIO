@@ -1,8 +1,8 @@
 import styles from "../styles/Projects.module.scss";
 import Project from "../types/project";
 import projectsData from "../data/projects";
-import NavBar from "../components/navBar";
 import Link from "next/link";
+import PageHeader from "../components/pageHeader";
 
 const Projects = ({ projects }: any) => {
   const RenderProjects = () => {
@@ -47,8 +47,9 @@ const Projects = ({ projects }: any) => {
     <>
       <div className={styles.pageContainer}>
         <div className={styles.page}>
-          <h2>Projects</h2>
-          <NavBar />
+          {/* <h2>Projects</h2>
+          <NavBar /> */}
+          <PageHeader text="Projects" />
           {RenderProjects()}
         </div>
       </div>
