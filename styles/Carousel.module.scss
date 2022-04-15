@@ -49,6 +49,12 @@
   flex-direction: column;
   pointer-events: all;
   cursor: pointer;
+  &:hover {
+    opacity: 1;
+    .carouselDirection {
+      transform: scale(1.5);
+    }
+  }
 }
 
 %carouselButtonBackground {
@@ -58,10 +64,6 @@
   width: 100%;
   opacity: 0;
   transition: opacity 0.25s ease;
-
-  &:hover {
-    opacity: 1;
-  }
 }
 
 .carouselButtonRight {
@@ -70,8 +72,6 @@
   align-items: flex-end;
   justify-content: center;
   &::after {
-    background: linear-gradient(to left, rgba(0, 0, 0, 0.4), transparent);
-
     @extend %carouselButtonBackground;
   }
 }
@@ -83,8 +83,6 @@
   justify-content: center;
 
   &::after {
-    background: linear-gradient(to right, rgba(0, 0, 0, 0.4), transparent);
-
     @extend %carouselButtonBackground;
   }
 }
@@ -97,7 +95,8 @@
   font-size: 40px;
   padding: 5px;
   color: black;
-  filter: invert(50%);
+  transition: transform 0.25s linear;
+  opacity: 0.6;
 }
 
 .projectImageFull {
