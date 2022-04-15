@@ -17,6 +17,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@mui/icons-material": "^5.4.2",
+    "@nivo/core": "^0.79.0",
     "@nivo/pie": "^0.79.1",
     "@reduxjs/toolkit": "^1.6.2",
     "@types/next-auth": "^3.15.0",
@@ -30,6 +31,7 @@
     "next": "^12.0.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.3.1",
     "react-multicolor-circular-progress-bar": "^1.0.3",
     "sass": "^1.41.1",
     "styled-components": "^5.3.1"

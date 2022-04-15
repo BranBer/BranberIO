@@ -1,0 +1,57 @@
+@import "./_base.scss";
+
+.skillsContainer {
+  display: flex;
+  width: 90%;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 1em;
+  column-gap: 1em;
+}
+
+.skillIconContainer {
+  width: 120px;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 3px solid $primary-color;
+  background-color: rgba(0, 0, 0, 0.5);
+  h3 {
+    width: 90%;
+  }
+}
+
+.skillIcon {
+  font-size: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.skillDescriptionContainer {
+  background-color: black;
+  color: $primary-color;
+  display: flex;
+  flex-direction: column;
+  width: 30vw;
+  padding: 10px;
+
+  .skillProficiency {
+    display: flex;
+    column-gap: 1em;
+
+    .proficiency {
+      font-weight: bolder;
+    }
+  }
+
+  .skillDescription {
+    p {
+      padding-left: 1em;
+      border-left: 2px solid $primary-color;
+    }
+  }
+}
