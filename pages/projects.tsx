@@ -3,6 +3,9 @@ import Project from "../types/project";
 import projectsData from "../data/projects";
 import Link from "next/link";
 import PageHeader from "../components/pageHeader";
+import { motion } from "framer-motion";
+import Page from "../components/page";
+import variants from "../animations/animations";
 
 const Projects = ({ projects }: any) => {
   const RenderProjects = () => {
@@ -13,8 +16,15 @@ const Projects = ({ projects }: any) => {
             ? `url(${project.images[0]})`
             : "black";
           return (
-            <div
+            <motion.div
               key={`Project${pIndex}`}
+              variants={variants}
+              initial="fadeInit"
+              animate="fadeAnimate"
+              transition={{
+                duration: 1,
+                delay: pIndex / (projects.length * 2),
+              }}
               className={styles.projectContainer}
               style={{ background: background, backgroundSize: "cover" }}
             >
@@ -36,7 +46,7 @@ const Projects = ({ projects }: any) => {
                   <button className={styles.generalButton}>Read More</button>
                 </Link>
               </div>
-            </div>
+            </motion.div>
           );
         })}
       </div>
@@ -44,16 +54,10 @@ const Projects = ({ projects }: any) => {
   };
 
   return (
-    <>
-      <div className={styles.pageContainer}>
-        <div className={styles.page}>
-          {/* <h2>Projects</h2>
-          <NavBar /> */}
-          <PageHeader text="Projects" />
-          {RenderProjects()}
-        </div>
-      </div>
-    </>
+    <Page>
+      <PageHeader text="Projects" />
+      {RenderProjects()}
+    </Page>
   );
 };
 

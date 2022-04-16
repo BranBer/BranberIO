@@ -1,6 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { AiFillCloseSquare } from "react-icons/ai";
 import React, { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
 import styles from "../styles/modal.module.scss";
@@ -44,7 +43,7 @@ const Modal: React.FC<modalProps> = ({ children, visible, onClose }) => {
               <div className={styles.modalContainer}>
                 <div className={styles.modalContent}>
                   <div className={styles.closeModal} onClick={() => onClose()}>
-                    <FontAwesomeIcon icon={faWindowClose} />
+                    <AiFillCloseSquare />
                   </div>
                   {children}
                 </div>

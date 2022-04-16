@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import PageHeader from "../../components/pageHeader";
+import Page from "../../components/page";
 
 interface projectRouteQuery {
   id: string;
@@ -22,53 +23,46 @@ const LanguagesPieChart = dynamic(
 
 const Project = ({ project }: { project: project }) => {
   return (
-    <>
-      <div className={styles.pageContainer}>
-        <div className={styles.page}>
-          <PageHeader text={project.name} />
-          <hr />
-          <Carousel images={project.images} />
-          <div className={styles.projectLinks}>
-            {project.repo && project.repo.link && (
-              <a href={project.repo.link} target="_blank" rel="noreferrer">
-                <div className={styles.projectLink}>
-                  <FontAwesomeIcon icon={faGithub} />
-                  <span>Visit Repo</span>
-                </div>
-              </a>
-            )}
-
-            {project.projectLink && (
-              <a href={project.repo.link} target="_blank" rel="noreferrer">
-                <div className={styles.projectLink}>
-                  <FontAwesomeIcon icon={faGlobe} />
-                  <span>Visit Site</span>
-                </div>
-              </a>
-            )}
-          </div>
-          <hr />
-          <div className={styles.projectDescriptionContainer}>
-            <div className={styles.projectDescription}>
-              <p>{project.description}</p>
+    <Page>
+      <PageHeader text={project.name} />
+      <hr />
+      <Carousel images={project.images} />
+      <div className={styles.projectLinks}>
+        {project.repo && project.repo.link && (
+          <a href={project.repo.link} target="_blank" rel="noreferrer">
+            <div className={styles.projectLink}>
+              <FontAwesomeIcon icon={faGithub} />
+              <span>Visit Repo</span>
             </div>
-          </div>
+          </a>
+        )}
 
-          <hr />
-          <h3>Project Languages</h3>
-          <LanguagesPieChart
-            owner={project.repo.owner}
-            repo={project.repo.repo}
-          />
-          <hr />
-          <Link passHref href="/projects">
-            <button className={styles.generalButton}>
-              <FontAwesomeIcon icon={faArrowLeft} /> Back to projects..
-            </button>
-          </Link>
+        {project.projectLink && (
+          <a href={project.repo.link} target="_blank" rel="noreferrer">
+            <div className={styles.projectLink}>
+              <FontAwesomeIcon icon={faGlobe} />
+              <span>Visit Site</span>
+            </div>
+          </a>
+        )}
+      </div>
+      <hr />
+      <div className={styles.projectDescriptionContainer}>
+        <div className={styles.projectDescription}>
+          <p>{project.description}</p>
         </div>
       </div>
-    </>
+
+      <hr />
+      <h3>Project Languages</h3>
+      <LanguagesPieChart owner={project.repo.owner} repo={project.repo.repo} />
+      <hr />
+      <Link passHref href="/projects">
+        <button className={styles.generalButton}>
+          <FontAwesomeIcon icon={faArrowLeft} /> Back to projects..
+        </button>
+      </Link>
+    </Page>
   );
 };
 

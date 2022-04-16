@@ -32,27 +32,26 @@
 }
 
 .modalContent {
-  background-color: $primary-color;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 2px solid $primary-color;
   z-index: 500;
-  //width: fit-content;
   position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   pointer-events: all;
-  padding: 5px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
 .closeModal {
-  width: 20px;
-  height: 20px;
+  font-size: 25px;
   color: $primary-color;
+  opacity: 0.75;
   cursor: pointer;
   position: absolute;
-  top: 0;
-  right: 0;
-  transform: translate(125%, -98%);
+  top: 5px;
+  right: 5px;
+  //transform: translate(125%, -98%);
 }

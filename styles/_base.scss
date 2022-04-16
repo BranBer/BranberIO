@@ -25,6 +25,11 @@ $background-color: black;
   }
 }
 
+.responsive {
+  width: 100%;
+  height: 100%;
+}
+
 .pageContainer {
   width: 100vw;
   height: 100vh;
@@ -38,19 +43,37 @@ $background-color: black;
 }
 
 .page {
-  @include scrollbar;
+  width: 70vw;
+  height: 100%;
 
+  position: absolute;
+}
+
+.pageBackground {
   width: 70vw;
   height: 100%;
   position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 100;
+}
+
+.pageContent {
+  @include scrollbar;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  background: transparent;
   align-items: center;
-  background: rgba(1, 1, 1, 0.9);
   row-gap: 1em;
   color: $primary-color;
   overflow-y: scroll;
+  position: relative;
+  z-index: 200;
 
   h2 {
     font-size: 9vw;
@@ -90,4 +113,8 @@ $background-color: black;
   &:hover {
     transform: scale(1.1);
   }
+}
+
+:export {
+  primaryColor: $primary-color;
 }
