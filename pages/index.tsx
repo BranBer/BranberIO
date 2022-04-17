@@ -55,40 +55,35 @@ const Home: NextPage = () => {
 
   return (
     <Page>
-      <h2>BRANBER.IO</h2>
-      <div className={styles.profilePicContainer}>
-        <div className={styles.profilePic} />
-        {renderOrbitals()}
+      <div className={styles.homePageContent}>
+        <h2>BRANBER.IO</h2>
+        <div className={styles.profilePicContainer}>
+          <div className={styles.profilePic} />
+          {renderOrbitals()}
+        </div>
+        <div className={styles.socialMediaContainer}>
+          <a
+            href="https://www.facebook.com/brandon.berke.3/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FontAwesomeIcon icon={faFacebookSquare} className={styles.icon} />
+          </a>
+          <a href="https://github.com/BranBer" target="_blank" rel="noreferrer">
+            <FontAwesomeIcon icon={faGithubSquare} className={styles.icon} />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/brandon-berke-84111b199/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FontAwesomeIcon icon={faLinkedin} className={styles.icon} />
+          </a>
+        </div>
+        <NavBar />
       </div>
-      <div className={styles.socialMediaContainer}>
-        <a
-          href="https://www.facebook.com/brandon.berke.3/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <FontAwesomeIcon icon={faFacebookSquare} className={styles.icon} />
-        </a>
-        <a href="https://github.com/BranBer" target="_blank" rel="noreferrer">
-          <FontAwesomeIcon icon={faGithubSquare} className={styles.icon} />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/brandon-berke-84111b199/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <FontAwesomeIcon icon={faLinkedin} className={styles.icon} />
-        </a>
-      </div>
-      <NavBar />
     </Page>
   );
 };
-
-// Home.getInitialProps(({req, res}) => {
-
-//   return {props: {
-//     accessToken: ""
-//   }}
-// });
 
 export default Home;
