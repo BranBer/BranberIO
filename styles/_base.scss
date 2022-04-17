@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
+@import "./breakpoints.scss";
 
 $primary-color: #ff976b;
 $secondary-color: turquoise;
@@ -45,8 +46,12 @@ $background-color: black;
 .page {
   width: 70vw;
   height: 100%;
-
+  padding-top: 10px;
   position: absolute;
+
+  @include sm {
+    padding-bottom: 5px;
+  }
 }
 
 .pageBackground {
@@ -58,6 +63,10 @@ $background-color: black;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.9);
   z-index: 100;
+
+  @include sm {
+    width: 100vw;
+  }
 }
 
 .pageContent {
@@ -76,9 +85,12 @@ $background-color: black;
   z-index: 200;
 
   h2 {
-    font-size: 9vw;
+    font-size: 80px;
     font-weight: lighter;
     margin: 0;
+    @include sm {
+      font-size: 50px;
+    }
   }
 
   hr {

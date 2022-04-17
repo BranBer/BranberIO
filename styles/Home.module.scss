@@ -83,6 +83,11 @@ $social-media-icon-count: 3;
   background-size: cover;
   background-position: 100% 50%;
   border-radius: 500px;
+
+  @include sm {
+    width: 70%;
+    padding-bottom: 70%;
+  }
 }
 
 @while $half-circle-count < $orbital-count {
@@ -97,6 +102,11 @@ $social-media-icon-count: 3;
     border-bottom-color: transparent;
     border-left-color: transparent;
     animation-duration: #{random(35) + 5}s;
+
+    @include sm {
+      width: 70%;
+      padding-bottom: 70%;
+    }
   }
 
   $half-circle-count: $half-circle-count + 1;

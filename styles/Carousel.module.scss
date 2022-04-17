@@ -9,6 +9,11 @@
 
   border: 2px solid $primary-color;
 
+  @include sm {
+    width: 100%;
+    padding-bottom: 100%;
+  }
+
   &::before {
     content: "Please Wait";
     position: absolute;

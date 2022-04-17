@@ -17,7 +17,7 @@
   justify-content: center;
   align-items: center;
   row-gap: 3em;
-  padding: 50px 0 50px 0;
+  padding: 0 0 25px 0;
 }
 
 .skillCategory {
@@ -51,6 +51,11 @@
   background-color: rgba(0, 0, 0, 0.6);
   transition: box-shadow 0.5s linear;
   box-shadow: 0 0 0 0 $primary-color;
+
+  @include sm {
+    width: 100px;
+    height: 125px;
+  }
 
   &:hover {
     box-shadow: 0 0 10px 0 $primary-color;
