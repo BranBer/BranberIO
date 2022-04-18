@@ -72,7 +72,7 @@ $blob-count: 16;
 
 .page {
   background: $primary-color;
-  box-shadow: inset 0 0 50px 0 black;
+  box-shadow: inset 0 0 100px 0 black;
   position: absolute;
   top: 0;
   left: 0;
@@ -85,6 +85,7 @@ $blob-count: 16;
 .lava {
   height: 100%;
   width: 100%;
+  transform: scale(1.1);
   position: absolute;
   overflow: visible;
   z-index: 0;
