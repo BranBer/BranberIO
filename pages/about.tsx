@@ -6,7 +6,6 @@ import Education from "../components/education";
 import educationalExperiences from "../data/education";
 import { AiFillFilePdf } from "react-icons/ai";
 import Modal from "../components/modal";
-import dynamic from "next/dynamic";
 
 const About = () => {
   const [pdfModalOpen, setPdfModalOpen] = useState(false);
@@ -46,7 +45,6 @@ const About = () => {
             </p>
           </div>
         </div>
-
         <h3 className={styles.generalHeader}>Education</h3>
         {educationalExperiences.map(
           (
