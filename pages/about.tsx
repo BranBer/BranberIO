@@ -33,7 +33,7 @@ const About = () => {
               inquiry, please reach out to me at{" "}
               <span className={styles.email}>brandonberke@gmail.com</span>
             </p>
-            <p>
+            <p className={styles.resumeParagraph}>
               <span className={styles.tab} /> If you would like to see a more
               detailed view of my experience, please see my resume at{" "}
               <button

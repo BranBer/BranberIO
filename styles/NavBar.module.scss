@@ -10,6 +10,9 @@
   width: 90%;
 
   button {
+    @include md {
+      font-size: 20px;
+    }
     @include sm {
       font-size: 20px;
     }

@@ -30,7 +30,7 @@ const Education: React.FC<educationProps> = ({
         style={{
           background: `rgba(0,0,0,.8) url(${imageSrc})`,
           backgroundBlendMode: "darken",
-          backgroundSize: "100%",
+          backgroundSize: "120%",
           backgroundRepeat: "no-repeat",
           backgroundPosition: "center",
         }}
