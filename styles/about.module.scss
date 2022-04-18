@@ -1,0 +1,68 @@
+@import "./base";
+
+.aboutContainer {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  column-gap: 2em;
+}
+
+.aboutImage {
+  background: url("https://branberio.s3.us-east-2.amazonaws.com/about/20191224_012637.jpg")
+    $primary-color;
+  background-size: 110%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 30%;
+  padding-bottom: 30%;
+  border-radius: 10px;
+  border: 1px solid $primary-color;
+  box-shadow: 0 0 5px 0 $primary-color;
+  height: 0;
+  position: relative;
+  z-index: 200;
+}
+
+.aboutContent {
+  width: 70%;
+
+  border-left: 1px solid $primary-color;
+
+  p {
+    text-align: left;
+    padding-left: 1em;
+    line-height: 1.5;
+    width: 90%;
+  }
+
+  .generalButton {
+    border-radius: 10px;
+    font-size: 15px;
+    transition: box-shadow 0.25s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 0 5px 0 $primary-color;
+      transform: scale(1);
+    }
+  }
+}
+
+.resumePdf {
+  height: 90vh;
+  width: 60vw;
+}
+
+.email {
+  background: $primary-color;
+  color: black;
+  font-weight: bolder;
+  padding: 2px;
+  border-radius: 10px;
+
+  transition: box-shadow 0.25s ease-in-out;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0 0 5px 0 $primary-color;
+    transform: scale(1);
+  }
+}

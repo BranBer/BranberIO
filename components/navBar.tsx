@@ -21,13 +21,8 @@ const NavBar = () => {
       onClick: () => {},
     },
     {
-      text: "Experience",
-      href: "/",
-      onClick: () => {},
-    },
-    {
-      text: "Contact",
-      href: "/",
+      text: "About",
+      href: "/about",
       onClick: () => {},
     },
   ];

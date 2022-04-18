@@ -33,7 +33,6 @@
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-multicolor-circular-progress-bar": "^1.0.3",
-    "sass": "^1.41.1",
     "styled-components": "^5.3.1"
   },
   "devDependencies": {
@@ -44,6 +43,7 @@
     "babel-plugin-styled-components": "^1.13.2",
     "eslint": "7.32.0",
     "eslint-config-next": "11.1.2",
+    "sass": "^1.50.0",
     "typescript": "4.4.3"
   }
 }

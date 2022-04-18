@@ -127,6 +127,21 @@ $background-color: black;
   }
 }
 
+.tab {
+  margin-left: 2em;
+}
+
+.generalHeader {
+  font-size: 28px;
+  margin: 0;
+  padding: 0;
+}
+
+.url {
+  a {
+    color: turquoise;
+  }
+}
 :export {
   primaryColor: $primary-color;
 }
