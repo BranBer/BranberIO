@@ -8,7 +8,9 @@ $background-color: black;
 
 @mixin scrollbar {
   &::-webkit-scrollbar {
-    width: 10px;
+    width: 5px;
+    height: 5px;
+    background: transparent;
     opacity: 0.5;
   }
 
@@ -20,9 +22,20 @@ $background-color: black;
 
   /* Handle */
   &::-webkit-scrollbar-thumb {
-    border-left: 5px solid $primary-color;
+    background: $primary-color;
     opacity: 0.5;
-    //border: 1px solid $primary-color;
+  }
+
+  &::-webkit-scrollbar-button {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-track-piece {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-corner {
+    background: transparent;
   }
 }
 
@@ -97,6 +110,10 @@ $background-color: black;
     font-size: 80px;
     font-weight: lighter;
     margin: 0;
+    @include md {
+      font-size: 60px;
+    }
+
     @include sm {
       font-size: 50px;
     }
