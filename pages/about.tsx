@@ -20,8 +20,8 @@ const About = () => {
               <span className={styles.tab} />I am a versatile developer with a
               wide skillset. I have an affinity for learning new things, and my
               specialty lies in frontend development; Particularly with the
-              React.js framework. That's not to say I'm not skilled in other
-              areas of development.
+              React.js framework. That&apos;s not to say I&apos;m not skilled in
+              other areas of development.
             </p>
             <p>
               <span className={styles.tab} />I can build anything from visually

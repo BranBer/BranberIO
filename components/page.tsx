@@ -1,4 +1,3 @@
-import react from "React";
 import styles from "../styles/page.module.scss";
 import AnimatedPage from "./animatedPage";
 
