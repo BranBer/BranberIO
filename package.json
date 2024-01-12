@@ -25,12 +25,10 @@
     "@types/react-dom": "^18.0.0",
     "cookies-next": "^2.0.4",
     "framer-motion": "^10.18.0",
-    "gooey-react": "^1.1.0",
     "next": "^14.0.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.3.1",
-    "react-multicolor-circular-progress-bar": "^1.0.3",
     "styled-components": "^5.3.1"
   },
   "devDependencies": {
