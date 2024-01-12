@@ -21,7 +21,6 @@ import {
   SiGraphql,
   SiHtml5,
   SiKubernetes,
-  SiMaterialui,
   SiMongodb,
   SiPandas,
   SiPostgresql,
@@ -30,6 +29,7 @@ import {
   SiTypescript,
   SiUbuntu,
   SiWindows,
+  SiMui,
 } from "react-icons/si";
 import { AiFillGithub, AiFillPieChart } from "react-icons/ai";
 import { BiGitBranch } from "react-icons/bi";
@@ -38,7 +38,7 @@ const skills = {
   Libraries: [
     {
       skill: "Material UI",
-      icon: SiMaterialui,
+      icon: SiMui,
     },
     {
       skill: "Ant Design",
