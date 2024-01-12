@@ -38,7 +38,11 @@ const Project = ({ project }: { project: project }) => {
         )}
 
         {project.projectLink && (
-          <a href={project.repo.link} target="_blank" rel="noreferrer">
+          <a
+            href={project.projectLink || project.repo.link}
+            target="_blank"
+            rel="noreferrer"
+          >
             <div className={styles.projectLink}>
               <FontAwesomeIcon icon={faGlobe} />
               <span>Visit Site</span>

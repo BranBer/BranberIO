@@ -4,10 +4,8 @@ import {
   DiCss3,
   DiDjango,
   DiDocker,
-  DiHtml5,
   DiJira,
   DiJsBadge,
-  DiLinux,
   DiNginx,
   DiPython,
   DiReact,
@@ -21,6 +19,7 @@ import {
   SiDebian,
   SiFramer,
   SiGraphql,
+  SiHtml5,
   SiKubernetes,
   SiMaterialui,
   SiMongodb,
@@ -70,7 +69,7 @@ const skills = {
 
     {
       skill: "Html5",
-      icon: SiPostgresql,
+      icon: SiHtml5,
     },
     {
       skill: "CSS3",
@@ -100,7 +99,7 @@ const skills = {
     },
     {
       skill: "Postgres SQL",
-      icon: DiHtml5,
+      icon: SiPostgresql,
     },
   ],
   Hardware: [

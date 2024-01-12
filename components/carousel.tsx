@@ -89,6 +89,7 @@ const Carousel: React.FC<CarouselProps> = ({ images }) => {
               background: `url(${images[currentImageIndex]})`,
               backgroundSize: "contain",
               backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
             }}
             custom={direction}
             variants={carouselVariants}

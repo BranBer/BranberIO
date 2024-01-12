@@ -20,6 +20,36 @@ const projectsData: project[] = [
     ],
     tags: ["backend", "django", "python"],
   },
+  {
+    id: "pronto-portal",
+    name: "Pronto Portal",
+    description:
+      "*WIP* This platform was created for small business owners who manage a network of translators. It allows them to assign work to their translators, and reminds both the translator and the receiving party of the translator of their upcoming appointment. The application leverages AWS for hosting, Twilio for text reminders, and Stripe for subscriptions.",
+    repo: {
+      link: "https://github.com/pronto-portal/pronto-infrastructure",
+      repo: "pronto-portal",
+      owner: "pronto-portal",
+    },
+    projectLink: "https://prontotranslationservices.com/",
+    images: [
+      "https://branberio.s3.us-east-2.amazonaws.com/pronto-portal/login.PNG",
+      "https://branberio.s3.us-east-2.amazonaws.com/pronto-portal/assignments.PNG",
+      "https://branberio.s3.us-east-2.amazonaws.com/pronto-portal/analytics.PNG",
+      "https://branberio.s3.us-east-2.amazonaws.com/pronto-portal/translators.PNG",
+      "https://branberio.s3.us-east-2.amazonaws.com/pronto-portal/pronto-aws-networking.drawio.png",
+      "https://branberio.s3.us-east-2.amazonaws.com/pronto-portal/pronto-application.drawio.png",
+    ],
+    tags: [
+      "aws",
+      "lambda",
+      "ecs",
+      "terraform",
+      "docker",
+      "typescript",
+      "react",
+      "next.js",
+    ],
+  },
 ];
 
 export default projectsData;
