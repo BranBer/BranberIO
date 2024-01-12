@@ -32,14 +32,12 @@ const NavBar = () => {
       {NavOptions.map((option, index) => {
         return (
           <Link key={`navLink${index}`} passHref href={option.href}>
-            <a>
-              <TransitionButton
-                onClick={option.onClick}
-                key={`NavOption${option.text}${index}`}
-              >
-                {option.text}
-              </TransitionButton>
-            </a>
+            <TransitionButton
+              onClick={option.onClick}
+              key={`NavOption${option.text}${index}`}
+            >
+              {option.text}
+            </TransitionButton>
           </Link>
         );
       })}{" "}
