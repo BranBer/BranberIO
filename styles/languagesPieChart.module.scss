@@ -1,0 +1,21 @@
+@import "_base.scss";
+
+.languagesPieChartWrapper {
+  position: relative;
+  height: 350px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.languagesPieChart {
+  height: 350px;
+  width: 100%;
+  position: absolute;
+  display: block;
+  z-index: 300;
+  overflow: visible;
+  color: $primary-color;
+}

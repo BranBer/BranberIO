@@ -12,27 +12,17 @@ const NavBar = () => {
     },
     {
       text: "Projects",
-      href: "/projects/1",
+      href: "/projects",
       onClick: () => {},
     },
     {
       text: "Skills",
-      href: "/",
+      href: "/skills",
       onClick: () => {},
     },
     {
-      text: "Experience",
-      href: "/",
-      onClick: () => {},
-    },
-    {
-      text: "Contact",
-      href: "/",
-      onClick: () => {},
-    },
-    {
-      text: "Login",
-      href: "/login",
+      text: "About",
+      href: "/about",
       onClick: () => {},
     },
   ];

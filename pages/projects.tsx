@@ -1,0 +1,68 @@
+import styles from "../styles/Projects.module.scss";
+import Project from "../types/project";
+import projectsData from "../data/projects";
+import Link from "next/link";
+import PageHeader from "../components/pageHeader";
+import { motion } from "framer-motion";
+import Page from "../components/page";
+import variants from "../animations/animations";
+
+const Projects = ({ projects }: any) => {
+  const RenderProjects = () => {
+    return (
+      <div className={styles.projectsContainer}>
+        {projects.map((project: Project, pIndex: number) => {
+          let background = project.images
+            ? `url(${project.images[0]})`
+            : "black";
+          return (
+            <motion.div
+              key={`Project${pIndex}`}
+              variants={variants}
+              initial="fadeInit"
+              animate="fadeAnimate"
+              transition={{
+                duration: 1,
+                delay: pIndex / (projects.length * 2),
+              }}
+              className={styles.projectContainer}
+              style={{ background: background, backgroundSize: "cover" }}
+            >
+              <div className={styles.projectOverlay}>
+                <h3>{project.name}</h3>
+                <div className={styles.projectTags}>
+                  {project.tags.map((tag: string, tIndex: number) => {
+                    return (
+                      <div
+                        key={`project${pIndex}tag${tIndex}`}
+                        className={styles.projectTag}
+                      >
+                        {tag}
+                      </div>
+                    );
+                  })}
+                </div>
+                <Link href={`/projects/${project.id}`} passHref>
+                  <button className={styles.generalButton}>Read More</button>
+                </Link>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    );
+  };
+
+  return (
+    <Page>
+      <PageHeader text="Projects" />
+      {RenderProjects()}
+    </Page>
+  );
+};
+
+Projects.getInitialProps = async () => {
+  return { projects: projectsData };
+};
+
+export default Projects;

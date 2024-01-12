@@ -1,0 +1,102 @@
+@import "./base";
+
+.aboutContainer {
+  width: 90%;
+  display: flex;
+  align-items: center;
+  column-gap: 2em;
+  padding-bottom: 3em;
+
+  @include sm {
+    flex-flow: column nowrap;
+
+    .resumeParagraph {
+      display: none;
+    }
+  }
+
+  @include md {
+    flex-flow: column nowrap;
+  }
+}
+
+.aboutImage {
+  background: url("https://branberio.s3.us-east-2.amazonaws.com/about/20191224_012637.jpg")
+    $primary-color;
+  background-size: 110%;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 30%;
+  padding-bottom: 30%;
+  border-radius: 10px;
+  border: 1px solid $primary-color;
+  box-shadow: 0 0 5px 0 $primary-color;
+  height: 0;
+  position: relative;
+  z-index: 200;
+  @include sm {
+    width: 70%;
+    padding-bottom: 70%;
+  }
+
+  @include md {
+    width: 60%;
+    padding-bottom: 60%;
+  }
+}
+
+.aboutContent {
+  width: 70%;
+
+  @include sm {
+    width: 100%;
+
+    .tab {
+      margin: 0;
+    }
+  }
+
+  @include md {
+    width: 100%;
+
+    .tab {
+      margin: 0;
+    }
+  }
+
+  p {
+    text-align: left;
+    padding-left: 0.5em;
+    line-height: 1.5;
+    width: 90%;
+
+    @include sm {
+      text-align: center;
+    }
+
+    @include md {
+      text-align: center;
+    }
+  }
+
+  .generalButton {
+    border-radius: 10px;
+    font-size: 15px;
+    transition: box-shadow 0.25s ease-in-out;
+
+    &:hover {
+      box-shadow: 0 0 5px 0 $primary-color;
+      transform: scale(1);
+    }
+  }
+}
+
+.resumePdf {
+  height: 90vh;
+  width: 60vw;
+}
+
+.email {
+  font-weight: bolder;
+  font-size: 22px;
+}

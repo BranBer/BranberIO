@@ -1,3 +1,4 @@
+import React from "react";
 import type { NextPage } from "next";
 import styles from "../styles/Home.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -7,7 +8,7 @@ import {
   faLinkedin,
 } from "@fortawesome/free-brands-svg-icons";
 import NavBar from "../components/navBar";
-
+import Page from "../components/page";
 
 interface ICircleStyle {
   dim: number;
@@ -54,49 +55,35 @@ const Home: NextPage = () => {
   };
 
   return (
-    <>
-      <div className={styles.pageContainer}>
-        <div className={styles.page}>
-          <h2>BRANBER.IO</h2>
-
-          <div className={styles.profilePicContainer}>
-            <div className={styles.profilePic} />
-            {renderOrbitals()}
-          </div>
-
-          <div className={styles.socialMediaContainer}>
-            <a
-              href="https://www.facebook.com/brandon.berke.3/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FontAwesomeIcon
-                icon={faFacebookSquare}
-                className={styles.icon}
-              />
-            </a>
-
-            <a
-              href="https://github.com/BranBer"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FontAwesomeIcon icon={faGithubSquare} className={styles.icon} />
-            </a>
-
-            <a
-              href="https://www.linkedin.com/in/brandon-berke-84111b199/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <FontAwesomeIcon icon={faLinkedin} className={styles.icon} />
-            </a>
-          </div>
-
-          <NavBar />
+    <Page>
+      <div className={styles.homePageContent}>
+        <h2>BRANBER.IO</h2>
+        <div className={styles.profilePicContainer}>
+          <div className={styles.profilePic} />
+          {renderOrbitals()}
         </div>
+        <div className={styles.socialMediaContainer}>
+          <a
+            href="https://www.facebook.com/brandon.berke.3/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FontAwesomeIcon icon={faFacebookSquare} className={styles.icon} />
+          </a>
+          <a href="https://github.com/BranBer" target="_blank" rel="noreferrer">
+            <FontAwesomeIcon icon={faGithubSquare} className={styles.icon} />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/brandon-berke-84111b199/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <FontAwesomeIcon icon={faLinkedin} className={styles.icon} />
+          </a>
+        </div>
+        <NavBar />
       </div>
-    </>
+    </Page>
   );
 };
 

@@ -1,0 +1,64 @@
+@import "./_base.scss";
+
+.educationContainer {
+  display: flex;
+  position: relative;
+  align-items: center;
+  padding-bottom: 2em;
+  column-gap: 1em;
+  width: 90%;
+}
+
+.educationHeading {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.educationHeader {
+  display: flex;
+  flex-flow: column wrap;
+
+  h3 {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.educationSite {
+  a {
+    font-size: 30px;
+  }
+}
+
+.educationContent {
+  border-radius: 10px;
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  row-gap: 1em;
+  padding: 1em;
+}
+
+.educationDetails {
+  width: 100%;
+
+  display: flex;
+  row-gap: 1em;
+  flex-flow: column nowrap;
+}
+
+.educationRow {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  label {
+    font-weight: bold;
+  }
+
+  span {
+    white-space: wrap;
+    text-align: right;
+  }
+}

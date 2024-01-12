@@ -1,0 +1,113 @@
+@import "./_base.scss";
+
+.skillsContainer {
+  display: flex;
+  width: 90%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2em;
+  column-gap: 2em;
+}
+.skillCategories {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 3em;
+  padding: 0 0 25px 0;
+}
+
+.skillCategory {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  row-gap: 1em;
+
+  padding: 15px;
+
+  h3 {
+    font-size: 28px;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.skillIconContainer {
+  width: 120px;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border: 3px solid $primary-color;
+  row-gap: 1em;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: box-shadow 0.5s linear;
+  box-shadow: 0 0 0 0 $primary-color;
+
+  @include sm {
+    width: 100px;
+    height: 125px;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px 0 $primary-color;
+  }
+  h3 {
+    width: 90%;
+    font-size: 15px;
+  }
+}
+
+.skillIcon {
+  font-size: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.skillDescriptionContainer {
+  background-color: rgba(0, 0, 0, 0.6);
+  color: $primary-color;
+  display: flex;
+  flex-direction: column;
+  row-gap: 1em;
+  width: 30vw;
+  padding: 10px;
+
+  color: $primary-color;
+
+  h3 {
+    padding: 0;
+    margin: 0;
+  }
+
+  .skillProficiency {
+    display: flex;
+    column-gap: 1em;
+    align-items: center;
+
+    .proficiency {
+      font-weight: bolder;
+    }
+  }
+
+  .skillDescription {
+    p {
+      padding-left: 1em;
+      border-left: 3px solid $primary-color;
+      font-size: 20px;
+    }
+  }
+}
+
+:export {
+  primaryColor: $primary-color;
+}

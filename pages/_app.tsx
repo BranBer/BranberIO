@@ -1,20 +1,19 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
-import { ApolloProvider } from "@apollo/client";
-import client from "../graphql/client";
 import Lavalamp from "../components/lavalamp";
-import { SessionProvider } from "next-auth/react";
-import "react-quill/dist/quill.snow.css";
-import "../styles/BranberQuillTheme.scss";
+import { AnimatePresence } from "framer-motion";
+import styles from "../styles/page.module.scss";
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+function MyApp({ Component, pageProps: { ...pageProps }, router }: AppProps) {
   return (
-    <SessionProvider session={session}>
-      <ApolloProvider client={client}>
-        <Lavalamp />
-        <Component {...pageProps} />
-      </ApolloProvider>
-    </SessionProvider>
+    <>
+      <Lavalamp />
+      <AnimatePresence>
+        <div className={styles.pageBackground} />
+
+        <Component {...pageProps} key={router.route} />
+      </AnimatePresence>
+    </>
   );
 }
 export default MyApp;
