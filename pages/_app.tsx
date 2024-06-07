@@ -3,16 +3,31 @@ import type { AppProps } from "next/app";
 import Lavalamp from "../components/lavalamp";
 import { AnimatePresence } from "framer-motion";
 import styles from "../styles/page.module.scss";
+import variants from "../animations/animations";
+import { motion } from "framer-motion";
 
 function MyApp({ Component, pageProps: { ...pageProps }, router }: AppProps) {
   return (
     <>
+      <div className={styles.background} />
       <Lavalamp />
-      <AnimatePresence>
-        <div className={styles.pageBackground} />
-
-        <Component {...pageProps} key={router.route} />
-      </AnimatePresence>
+      <div className={styles.pageContainer}>
+        <div className={styles.page}>
+          <AnimatePresence mode="wait">
+            <motion.div
+              variants={variants}
+              initial="fadeInit"
+              animate="fadeAnimate"
+              exit="fadeExit"
+              transition={{ duration: 0.5, ease: "easeInOut" }}
+              className={styles.pageMotion}
+              key={router.route}
+            >
+              <Component {...pageProps} />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+      </div>
     </>
   );
 }

@@ -46,11 +46,11 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  border: 3px solid $primary-color;
+  border: 3px solid $secondary-color;
   row-gap: 1em;
   background-color: rgba(0, 0, 0, 0.6);
   transition: box-shadow 0.5s linear;
-  box-shadow: 0 0 0 0 $primary-color;
+  box-shadow: 0 0 0 0 $secondary-color;
 
   @include sm {
     width: 100px;
@@ -58,7 +58,7 @@
   }
 
   &:hover {
-    box-shadow: 0 0 10px 0 $primary-color;
+    box-shadow: 0 0 10px 0 $secondary-color;
   }
   h3 {
     width: 90%;
@@ -75,14 +75,14 @@
 
 .skillDescriptionContainer {
   background-color: rgba(0, 0, 0, 0.6);
-  color: $primary-color;
+  color: $secondary-color;
   display: flex;
   flex-direction: column;
   row-gap: 1em;
   width: 30vw;
   padding: 10px;
 
-  color: $primary-color;
+  color: $secondary-color;
 
   h3 {
     padding: 0;
@@ -102,12 +102,12 @@
   .skillDescription {
     p {
       padding-left: 1em;
-      border-left: 3px solid $primary-color;
+      border-left: 3px solid $secondary-color;
       font-size: 20px;
     }
   }
 }
 
 :export {
-  primaryColor: $primary-color;
+  primaryColor: $secondary-color;
 }

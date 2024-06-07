@@ -77,7 +77,7 @@ $social-media-icon-count: 3;
   position: absolute;
   width: $half-circle-dim;
   padding-bottom: $half-circle-dim;
-  background-image: radial-gradient(transparent 40%, $primary-color),
+  background-image: radial-gradient(transparent 60%, $secondary-color),
     url("/static/images/brandon.jpg");
   background-blend-mode: hard-light;
   background-size: cover;
@@ -98,7 +98,7 @@ $social-media-icon-count: 3;
     width: $half-circle-dim;
     padding-bottom: $half-circle-dim;
     border-radius: 50%;
-    border: 2px solid $primary-color;
+    border: 2px solid $secondary-color;
     border-bottom-color: transparent;
     border-left-color: transparent;
     animation-duration: #{random(35) + 5}s;
@@ -117,7 +117,7 @@ $social-media-icon-count: 3;
   width: $half-circle-dim;
   padding-bottom: $half-circle-dim;
   border-radius: 50%;
-  border: 2px solid $primary-color;
+  border: 2px solid $secondary-color;
   border-bottom-color: transparent;
   border-left-color: transparent;
   animation-duration: #{random(35) + 5}s;

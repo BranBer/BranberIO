@@ -12,7 +12,7 @@
   font-weight: bold;
   font-family: "Roboto";
 
-  color: $primary-color;
+  color: $secondary-color;
   cursor: pointer;
   background-color: transparent;
 
@@ -30,7 +30,7 @@
 }
 
 .wall {
-  background-color: $primary-color;
+  background-color: $secondary-color;
   position: absolute;
   margin: 0;
   padding: 0;

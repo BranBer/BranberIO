@@ -6,13 +6,7 @@ interface pageProps {
 }
 
 const Page: React.FC<pageProps> = ({ children }) => {
-  return (
-    <div className={styles.pageContainer}>
-      <div className={styles.page}>
-        <AnimatedPage className={styles.pageContent}>{children}</AnimatedPage>
-      </div>
-    </div>
-  );
+  return <div className={styles.pageContent}>{children}</div>;
 };
 
 export default Page;

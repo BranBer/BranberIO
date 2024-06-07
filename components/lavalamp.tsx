@@ -4,7 +4,7 @@ import styles from "../styles/lavalamp.module.scss";
 
 const Lavalamp = () => {
   return (
-    <div className={styles.page}>
+    <div className={styles.lavaContainer}>
       <div className={styles.lava}>
         <div className={styles.blob}> </div>
         <div className={styles.blob}> </div>
@@ -23,6 +23,7 @@ const Lavalamp = () => {
         <div className={styles.blob}> </div>
         <div className={styles.blob}> </div>
       </div>
+      <div className={styles.backdrop} />
     </div>
   );
 };
