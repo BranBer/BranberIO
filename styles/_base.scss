@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
 @import "./breakpoints.scss";
 
-$primary-color: yellow;
-$secondary-color: yellow;
+$primary-color: turquoise;
+$secondary-color: turquoise;
 $ternary-color: purple;
 $background-color: black;
 
@@ -71,7 +71,7 @@ $background-color: black;
 }
 
 .page {
-  background-color: rgba(0, 0, 0, 0.85);
+  background-color: rgba(0, 0, 0, 0.9);
   width: 70vw;
   height: 100%;
   padding-top: 10px;
