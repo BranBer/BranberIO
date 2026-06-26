@@ -30,7 +30,17 @@ yarn-error.log*
 .env.development.local
 .env.test.local
 .env.production.local
+.env.production
+.env.test
+.env.staging
 .env
+*.env
+
+# private résumé / OE-sensitive employment material — NEVER commit (real employers, dates, overlaps)
+Brandon_Berke_Master_Resume_Archive.pdf
+*Resume*.pdf
+*Résumé*.pdf
+*resume*.pdf
 
 # vercel
 .vercel

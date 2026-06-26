@@ -1,0 +1,157 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 768" fill="none"
+     font-family="ui-sans-serif, system-ui, sans-serif" role="img"
+     aria-labelledby="awsTitle awsDesc">
+  <title id="awsTitle">MMA Almanac — AWS infrastructure topology</title>
+  <desc id="awsDesc">AWS topology for MMA Almanac on ECS Fargate. Internet traffic enters through an
+    Application Load Balancer in public subnets, which routes to ECS Fargate services — the Next.js UI,
+    the prediction API, PostgreSQL, and the scrapers — running in private subnets within a VPC.
+    EventBridge runs scheduled ML workflows that trigger Lambda, which starts ECS tasks. Supporting
+    services include Secrets Manager, CloudWatch, ECR, and GitHub Actions OIDC for deployment.</desc>
+
+  <defs>
+    <marker id="awsArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+    </marker>
+    <marker id="awsArrowOrange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#FF9900" />
+    </marker>
+  </defs>
+
+  <!-- ===== Header band (clears the diagram body below) ===== -->
+  <text x="40" y="52" font-size="26" font-weight="700" fill="currentColor">AWS Infrastructure — ECS Fargate Topology</text>
+  <text x="40" y="76" font-size="14" fill="currentColor" opacity="0.7">Terraform-defined VPC ·
+    <tspan fill="var(--accent, #3B5BDB)" font-weight="600">mma-almanac-aws</tspan></text>
+
+  <!-- ===== Diagram body (shifted down to clear the header) ===== -->
+  <g transform="translate(0,40)">
+    <!-- Internet -->
+    <g>
+      <rect x="60" y="120" width="150" height="60" rx="14" stroke="currentColor" stroke-width="1.5"
+            fill="currentColor" fill-opacity="0.06" />
+      <text x="135" y="150" text-anchor="middle" font-size="16" font-weight="700" fill="currentColor">Internet</text>
+      <text x="135" y="170" text-anchor="middle" font-size="12.5" fill="currentColor" opacity="0.7">users · GitHub</text>
+    </g>
+
+    <!-- VPC boundary -->
+    <rect x="60" y="220" width="900" height="450" rx="20" stroke="currentColor" stroke-width="1.75"
+          stroke-dasharray="2 5" fill="currentColor" fill-opacity="0.02" />
+    <text x="84" y="248" font-size="15" font-weight="700" fill="currentColor" opacity="0.8">VPC</text>
+
+    <!-- Public subnets band -->
+    <rect x="84" y="266" width="852" height="92" rx="14" stroke="#FF9900" stroke-width="1.5"
+          stroke-dasharray="6 5" fill="#FF9900" fill-opacity="0.05" />
+    <text x="104" y="288" font-size="12.5" font-weight="700" fill="#FF9900" letter-spacing="0.06em">PUBLIC SUBNETS</text>
+    <!-- ALB -->
+    <g>
+      <rect x="104" y="298" width="200" height="50" rx="12" stroke="#FF9900" stroke-width="1.5"
+            fill="#FF9900" fill-opacity="0.12" />
+      <text x="204" y="322" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor">ALB</text>
+      <text x="204" y="340" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">Application Load Balancer</text>
+    </g>
+    <!-- NAT / IGW -->
+    <g>
+      <rect x="332" y="298" width="170" height="50" rx="12" stroke="#FF9900" stroke-width="1.5"
+            fill="#FF9900" fill-opacity="0.12" />
+      <text x="417" y="322" text-anchor="middle" font-size="14" font-weight="700" fill="currentColor">NAT + IGW</text>
+      <text x="417" y="340" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">egress / ingress</text>
+    </g>
+
+    <!-- Private subnets band -->
+    <rect x="84" y="378" width="852" height="270" rx="14" stroke="currentColor" stroke-width="1.5"
+          stroke-dasharray="6 5" fill="currentColor" fill-opacity="0.04" />
+    <text x="104" y="400" font-size="12.5" font-weight="700" fill="currentColor" opacity="0.7" letter-spacing="0.06em">PRIVATE SUBNETS</text>
+
+    <!-- ECS Fargate cluster wrapper -->
+    <rect x="104" y="410" width="600" height="180" rx="14" stroke="#FF9900" stroke-width="1.5"
+          fill="#FF9900" fill-opacity="0.04" />
+    <text x="124" y="432" font-size="13" font-weight="700" fill="#FF9900">ECS Fargate cluster</text>
+
+    <!-- Service nodes -->
+    <g>
+      <rect x="124" y="446" width="170" height="60" rx="12" stroke="var(--accent, #3B5BDB)" stroke-width="1.5" fill="var(--accent, #3B5BDB)" fill-opacity="0.10" />
+      <text x="209" y="472" text-anchor="middle" font-size="14.5" font-weight="700" fill="currentColor">Next.js UI</text>
+      <text x="209" y="492" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">web service</text>
+    </g>
+    <g>
+      <rect x="310" y="446" width="170" height="60" rx="12" stroke="var(--accent, #3B5BDB)" stroke-width="1.5" fill="var(--accent, #3B5BDB)" fill-opacity="0.10" />
+      <text x="395" y="472" text-anchor="middle" font-size="14.5" font-weight="700" fill="currentColor">Prediction API</text>
+      <text x="395" y="492" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">ML inference</text>
+    </g>
+    <g>
+      <rect x="124" y="516" width="170" height="60" rx="12" stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.06" />
+      <text x="209" y="542" text-anchor="middle" font-size="14.5" font-weight="700" fill="currentColor">PostgreSQL</text>
+      <text x="209" y="562" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">postgres:15-alpine</text>
+    </g>
+    <g>
+      <rect x="310" y="516" width="170" height="60" rx="12" stroke="var(--accent, #3B5BDB)" stroke-width="1.5" fill="var(--accent, #3B5BDB)" fill-opacity="0.10" />
+      <text x="395" y="542" text-anchor="middle" font-size="14.5" font-weight="700" fill="currentColor">Scrapers</text>
+      <text x="395" y="562" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">scheduled task</text>
+    </g>
+    <!-- EFS (model storage) -->
+    <g>
+      <rect x="500" y="446" width="184" height="130" rx="12" stroke="#FF9900" stroke-width="1.5" fill="#FF9900" fill-opacity="0.08" />
+      <text x="592" y="500" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor">EFS</text>
+      <text x="592" y="522" text-anchor="middle" font-size="12" fill="currentColor" opacity="0.75">shared model store</text>
+      <text x="592" y="542" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.6">XGBoost artifacts</text>
+    </g>
+
+    <!-- EventBridge → Lambda → ECS (scheduled ML workflows) -->
+    <g>
+      <rect x="724" y="410" width="190" height="56" rx="12" stroke="#FF9900" stroke-width="1.5" fill="#FF9900" fill-opacity="0.12" />
+      <text x="819" y="434" text-anchor="middle" font-size="14.5" font-weight="700" fill="currentColor">EventBridge</text>
+      <text x="819" y="454" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">scheduled ML workflows</text>
+    </g>
+    <g>
+      <rect x="724" y="486" width="190" height="56" rx="12" stroke="#FF9900" stroke-width="1.5" fill="#FF9900" fill-opacity="0.12" />
+      <text x="819" y="510" text-anchor="middle" font-size="14.5" font-weight="700" fill="currentColor">Lambda</text>
+      <text x="819" y="530" text-anchor="middle" font-size="11.5" fill="currentColor" opacity="0.7">ECS task trigger</text>
+    </g>
+
+    <!-- Flow arrows -->
+    <line x1="135" y1="180" x2="135" y2="294" stroke="currentColor" stroke-width="2" marker-end="url(#awsArrow)" />
+    <text x="146" y="240" font-size="12.5" fill="currentColor" opacity="0.7">HTTPS</text>
+    <!-- ALB → UI -->
+    <path d="M204 348 q0 50 5 92" stroke="currentColor" stroke-width="2" marker-end="url(#awsArrow)" fill="none" />
+    <!-- UI → API -->
+    <line x1="294" y1="476" x2="306" y2="476" stroke="currentColor" stroke-width="2" marker-end="url(#awsArrow)" />
+    <!-- API/UI → PostgreSQL -->
+    <line x1="209" y1="506" x2="209" y2="512" stroke="currentColor" stroke-width="2" marker-end="url(#awsArrow)" />
+    <!-- API → EFS / scrapers → postgres -->
+    <line x1="480" y1="476" x2="496" y2="476" stroke="currentColor" stroke-width="2" marker-end="url(#awsArrow)" />
+    <line x1="310" y1="546" x2="298" y2="546" stroke="currentColor" stroke-width="2" marker-end="url(#awsArrow)" />
+    <!-- EventBridge → Lambda → ECS scrapers -->
+    <line x1="819" y1="466" x2="819" y2="482" stroke="#FF9900" stroke-width="2" marker-end="url(#awsArrowOrange)" />
+    <path d="M724 514 q-120 30 -240 36" stroke="#FF9900" stroke-width="1.75" stroke-dasharray="5 5" marker-end="url(#awsArrowOrange)" fill="none" />
+    <text x="600" y="600" font-size="12" fill="#FF9900" font-weight="600">start ECS task</text>
+
+    <!-- Supporting services column (right) -->
+    <text x="990" y="248" font-size="12.5" font-weight="700" fill="currentColor" opacity="0.6" letter-spacing="0.06em">PLATFORM SERVICES</text>
+    <g font-size="13.5" fill="currentColor">
+      <rect x="990" y="262" width="170" height="48" rx="11" stroke="#FF9900" stroke-width="1.5" fill="#FF9900" fill-opacity="0.10" />
+      <text x="1075" y="291" text-anchor="middle" font-weight="600">Secrets Manager</text>
+      <rect x="990" y="320" width="170" height="48" rx="11" stroke="#FF9900" stroke-width="1.5" fill="#FF9900" fill-opacity="0.10" />
+      <text x="1075" y="349" text-anchor="middle" font-weight="600">CloudWatch</text>
+      <rect x="990" y="378" width="170" height="48" rx="11" stroke="#FF9900" stroke-width="1.5" fill="#FF9900" fill-opacity="0.10" />
+      <text x="1075" y="407" text-anchor="middle" font-weight="600">ECR</text>
+      <rect x="990" y="436" width="170" height="62" rx="11" stroke="#FF9900" stroke-width="1.5" fill="#FF9900" fill-opacity="0.10" />
+      <text x="1075" y="461" text-anchor="middle" font-weight="600">GitHub Actions</text>
+      <text x="1075" y="481" text-anchor="middle" font-size="12" opacity="0.75">OIDC deploy</text>
+    </g>
+    <!-- platform services dotted link into VPC -->
+    <path d="M990 380 q-20 0 -50 10" stroke="currentColor" stroke-width="1.25" stroke-dasharray="3 4" opacity="0.5" fill="none" />
+
+    <!-- Legend -->
+    <g font-size="13" fill="currentColor">
+      <rect x="60" y="688" width="18" height="14" rx="3" fill="#FF9900" fill-opacity="0.12" stroke="#FF9900" stroke-width="1.5" />
+      <text x="86" y="700">AWS service</text>
+      <rect x="210" y="688" width="18" height="14" rx="3" fill="var(--accent, #3B5BDB)" fill-opacity="0.12" stroke="var(--accent, #3B5BDB)" stroke-width="1.5" />
+      <text x="236" y="700">Brandon's app service</text>
+      <rect x="420" y="688" width="18" height="14" rx="3" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-width="1.5" />
+      <text x="446" y="700">data / external</text>
+      <line x1="580" y1="695" x2="610" y2="695" stroke="currentColor" stroke-width="2" marker-end="url(#awsArrow)" />
+      <text x="620" y="700">traffic</text>
+      <line x1="690" y1="695" x2="720" y2="695" stroke="#FF9900" stroke-width="1.75" stroke-dasharray="5 5" marker-end="url(#awsArrowOrange)" />
+      <text x="730" y="700">scheduled trigger</text>
+    </g>
+  </g>
+</svg>

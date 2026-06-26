@@ -1,56 +1,58 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
+/**
+ * LanguagesPieChart — purely presentational (Story 3.6 / ADR 0001 Decision 4).
+ *
+ * Receives pre-computed language slices as props. Performs NO network requests.
+ * The fetch + percent computation was moved server-side into getStaticProps of
+ * the parent page; this component is client-rendered only for Nivo bundle-splitting.
+ */
+import React from "react";
 import { ResponsivePie } from "@nivo/pie";
-import styles from "../styles/languagesPieChart.module.scss";
-interface languagesPieChartProps {
-  owner: string;
-  repo: string;
+import type { LanguageSlice } from "../types/github";
+
+interface LanguagesPieChartProps {
+  slices: LanguageSlice[];
 }
 
-interface languagePieChartDatum {
+interface PieDatum {
   id: string;
   label: string;
-  value: string;
+  value: number;
 }
 
-const LanguagesPieChart: React.FC<languagesPieChartProps> = ({
-  owner,
-  repo,
-}) => {
-  const [data, setData] = useState<languagePieChartDatum[]>([]);
+const LanguagesPieChart: React.FC<LanguagesPieChartProps> = ({ slices }) => {
+  if (!slices || slices.length === 0) {
+    return (
+      <p
+        style={{
+          margin: 0,
+          fontSize: "var(--text-sm)",
+          color: "var(--fg-muted)",
+        }}
+      >
+        No language data available.
+      </p>
+    );
+  }
 
-  useEffect(() => {
-    fetch(`https://api.github.com/repos/${owner}/${repo}/languages`)
-      .then((res) => res.text())
-      .then((res) => {
-        if (res) {
-          const resData = Object.entries(JSON.parse(res));
-          let languageData = [];
-
-          let totalBytes: number = 0;
-
-          resData.forEach(([_, value]) => {
-            totalBytes += value as number;
-          });
-
-          for (let [language, bytes] of resData) {
-            const datum: languagePieChartDatum = {
-              id: language as string,
-              label: language as string,
-              value: (((bytes as number) / totalBytes) * 100).toFixed(2),
-            };
-            languageData.push(datum);
-          }
-
-          setData(languageData);
-        }
-      });
-  }, []);
+  const data: PieDatum[] = slices.map((s) => ({
+    id: s.name,
+    label: s.name,
+    value: s.percent,
+  }));
 
   return (
-    <div className={styles.languagesPieChartWrapper}>
-      <div className={styles.languagesPieChartWrapper}>
-        <div className={styles.languagesPieChart}>
+    <div style={{ width: "100%", height: "350px", position: "relative" }}>
+      <div style={{ width: "100%", height: "100%", position: "relative" }}>
+        <div
+          style={{
+            width: "100%",
+            height: "100%",
+            position: "absolute",
+            zIndex: 300,
+            overflow: "visible",
+            color: "var(--fg-muted)",
+          }}
+        >
           <ResponsivePie
             data={data}
             margin={{ top: 40, right: 80, bottom: 80, left: 80 }}

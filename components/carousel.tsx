@@ -1,115 +1,223 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import styles from "../styles/Carousel.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faChevronLeft,
-  faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import Modal from "./modal";
 
 interface CarouselProps {
   images: string[];
+  captions?: Record<string, string>;
 }
 
-const Carousel: React.FC<CarouselProps> = ({ images }) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+const ChevronLeftIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M15 18l-6-6 6-6" />
+  </svg>
+);
+
+const ChevronRightIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20"
+    height="20"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+    focusable="false"
+  >
+    <path d="M9 18l6-6-6-6" />
+  </svg>
+);
+
+const carouselVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? "60%" : "-60%",
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    zIndex: 1,
+  },
+  exit: (direction: number) => ({
+    x: direction < 0 ? "60%" : "-60%",
+    opacity: 0,
+    zIndex: 0,
+  }),
+};
+
+const Carousel: React.FC<CarouselProps> = ({ images, captions }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
-  const carouselVariants = {
-    enter: (direction: number) => {
-      return {
-        x: direction > 0 ? "100%" : "-100%",
-        opacity: 0,
-      };
-    },
-    center: {
-      zIndex: 1,
-      x: 0,
-      opacity: 1,
-    },
-    exit: (direction: number) => {
-      return {
-        zIndex: 0,
-        x: direction < 0 ? "100%" : "-100%",
-        opacity: 0,
-      };
-    },
+  const shouldReduceMotion = useReducedMotion();
+
+  const hasPrev = currentIndex > 0;
+  const hasNext = currentIndex < images.length - 1;
+
+  const goTo = (newIndex: number, dir: number) => {
+    setDirection(dir);
+    setCurrentIndex(newIndex);
   };
 
-  const handleClickLeftControl = () => {
-    const previousIndex = currentImageIndex - 1;
-    if (previousIndex >= 0) {
-      setCurrentImageIndex(previousIndex);
-    }
-    setDirection(-1);
-  };
-
-  const handleClickRightControl = () => {
-    const nextIndex = currentImageIndex + 1;
-    if (nextIndex < images.length) {
-      setCurrentImageIndex(nextIndex);
-    }
-    setDirection(1);
-  };
+  const currentImage = images[currentIndex];
+  const caption = captions?.[currentImage];
 
   return (
     <>
-      <div className={styles.carouselContainer}>
-        <div className={styles.carouselControls}>
-          <div
-            className={styles.carouselButtonLeft}
-            onClick={handleClickLeftControl}
-          >
-            <FontAwesomeIcon
-              icon={faChevronLeft}
-              className={styles.carouselDirection}
+      {/* Carousel frame — glass tier-1 */}
+      <div
+        className="glass"
+        style={{
+          borderRadius: "var(--radius-lg)",
+          overflow: "hidden",
+          position: "relative",
+        }}
+      >
+        {/* Image area */}
+        <div
+          style={{
+            position: "relative",
+            width: "100%",
+            aspectRatio: "16 / 9",
+            overflow: "hidden",
+            cursor: "zoom-in",
+          }}
+          onClick={() => setModalOpen(true)}
+          role="button"
+          tabIndex={0}
+          aria-label={`Open image ${currentIndex + 1} of ${images.length} in lightbox`}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              setModalOpen(true);
+            }
+          }}
+        >
+          <AnimatePresence custom={direction} mode="wait">
+            <motion.img
+              key={currentImage}
+              src={currentImage}
+              alt={caption || `Screenshot ${currentIndex + 1} of ${images.length}`}
+              custom={direction}
+              variants={shouldReduceMotion ? {} : carouselVariants}
+              initial={shouldReduceMotion ? { opacity: 1 } : "enter"}
+              animate={shouldReduceMotion ? { opacity: 1 } : "center"}
+              exit={shouldReduceMotion ? { opacity: 1 } : "exit"}
+              transition={{ duration: 0.25, ease: "easeInOut" }}
+              style={{
+                position: "absolute",
+                inset: 0,
+                width: "100%",
+                height: "100%",
+                objectFit: "contain",
+                objectPosition: "center",
+                background: "var(--surface)",
+              }}
             />
-          </div>
-
-          <div
-            className={styles.carouselButtonRight}
-            onClick={handleClickRightControl}
-          >
-            <FontAwesomeIcon
-              icon={faChevronRight}
-              className={styles.carouselDirection}
-            />
-          </div>
+          </AnimatePresence>
         </div>
 
-        <AnimatePresence custom={direction} exitBeforeEnter>
-          <motion.img
-            className={styles.carouselImage}
-            onClick={() => setModalOpen(true)}
-            key={images[currentImageIndex]}
-            src={`url(${images[currentImageIndex]})`}
+        {/* Controls row */}
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "space-between",
+            padding: "0.75rem 1rem",
+            borderTop: "1px solid var(--glass-border)",
+            gap: "1rem",
+          }}
+        >
+          {/* Prev button */}
+          <button
+            onClick={() => hasPrev && goTo(currentIndex - 1, -1)}
+            disabled={!hasPrev}
+            aria-label="Previous image"
             style={{
-              background: `url(${images[currentImageIndex]})`,
-              backgroundSize: "contain",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "2rem",
+              height: "2rem",
+              borderRadius: "var(--radius-pill)",
+              background: hasPrev ? "var(--glass-bg-chip)" : "transparent",
+              border: "1px solid var(--glass-border)",
+              color: hasPrev ? "var(--fg)" : "var(--fg-subtle)",
+              cursor: hasPrev ? "pointer" : "default",
+              opacity: hasPrev ? 1 : 0.4,
+              padding: 0,
             }}
-            custom={direction}
-            variants={carouselVariants}
-            animate="center"
-            exit="exit"
-            initial="enter"
-            transition={{
-              ease: "linear",
-              duration: 0.25,
+          >
+            <ChevronLeftIcon />
+          </button>
+
+          {/* Caption / counter */}
+          <div
+            style={{
+              flex: 1,
+              textAlign: "center",
+              fontSize: "var(--text-xs)",
+              color: "var(--fg-muted)",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              whiteSpace: "nowrap",
             }}
-          />
-          ) );
-        </AnimatePresence>
+          >
+            {caption || `${currentIndex + 1} / ${images.length}`}
+          </div>
+
+          {/* Next button */}
+          <button
+            onClick={() => hasNext && goTo(currentIndex + 1, 1)}
+            disabled={!hasNext}
+            aria-label="Next image"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: "2rem",
+              height: "2rem",
+              borderRadius: "var(--radius-pill)",
+              background: hasNext ? "var(--glass-bg-chip)" : "transparent",
+              border: "1px solid var(--glass-border)",
+              color: hasNext ? "var(--fg)" : "var(--fg-subtle)",
+              cursor: hasNext ? "pointer" : "default",
+              opacity: hasNext ? 1 : 0.4,
+              padding: 0,
+            }}
+          >
+            <ChevronRightIcon />
+          </button>
+        </div>
       </div>
+
+      {/* Lightbox modal */}
       <Modal visible={modalOpen} onClose={() => setModalOpen(false)}>
         <img
-          className={styles.projectImageFull}
-          alt="current project image"
-          src={images[currentImageIndex]}
-          style={{ objectFit: "contain" }}
+          src={currentImage}
+          alt={caption || `Screenshot ${currentIndex + 1} of ${images.length}`}
+          style={{
+            display: "block",
+            maxWidth: "min(90vw, 1100px)",
+            maxHeight: "80vh",
+            objectFit: "contain",
+          }}
         />
       </Modal>
     </>

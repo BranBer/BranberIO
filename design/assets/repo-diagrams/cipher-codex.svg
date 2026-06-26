@@ -1,0 +1,177 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" fill="none"
+     stroke="currentColor" color="currentColor" role="img"
+     aria-labelledby="cc-title cc-desc" font-family="ui-sans-serif, system-ui, sans-serif">
+  <title id="cc-title">Cipher Codex marketing site — Next.js App Router architecture</title>
+  <desc id="cc-desc">A left-to-right diagram of the Cipher Codex agency site: a visitor enters
+    the Next.js App Router, wrapped by a scroll-driven ScrollProvider that orchestrates page routes
+    (home, about, services, articles, contact). Pages compose an in-house UI component library and a
+    custom D3 data-visualization library (Area, Bar, Heatmap, Radar, Tree, Treemap, Pie, Radial,
+    Delaunay charts). The contact page submits through a contact form flow. Brandon's custom
+    viz library is highlighted in the accent color.</desc>
+
+  <defs>
+    <marker id="cc-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" stroke="none"/>
+    </marker>
+    <marker id="cc-arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--accent, #3B5BDB)" stroke="none"/>
+    </marker>
+  </defs>
+
+  <style>
+    .node { stroke: currentColor; stroke-width:1.5; }
+    .fill-soft { fill: currentColor; fill-opacity:0.06; }
+    .lbl { fill: currentColor; stroke: none; }
+    .ttl { font-weight:700; }
+    .sub { fill: currentColor; fill-opacity:0.65; stroke:none; }
+    .lane { fill: currentColor; fill-opacity:0.03; stroke: currentColor; stroke-opacity:0.25; stroke-width:1; stroke-dasharray:3 4; }
+    .lane-lbl { fill: currentColor; fill-opacity:0.55; stroke:none; font-weight:600; letter-spacing:0.08em; }
+    .accent { stroke:var(--accent, #3B5BDB); }
+    .accent-fill { fill:var(--accent, #3B5BDB); fill-opacity:0.10; stroke:var(--accent, #3B5BDB); }
+    .accent-lbl { fill:var(--accent, #3B5BDB); stroke:none; }
+    .conn { stroke:currentColor; stroke-width:1.5; }
+    .conn-accent { stroke:var(--accent, #3B5BDB); stroke-width:1.5; }
+  </style>
+
+  <!-- Title -->
+  <text x="40" y="50" class="lbl ttl" font-size="26">Cipher Codex — Agency Marketing Site</text>
+  <text x="40" y="78" class="sub" font-size="15">Next.js App Router · in-house UI library · custom D3 data-viz library · scroll-driven storytelling</text>
+
+  <!-- Body (shifted down to clear the header block) -->
+  <g transform="translate(0,48)">
+  <!-- ===== Lane: Entry ===== -->
+  <text x="60" y="120" class="lane-lbl" font-size="12">VISITOR</text>
+  <rect x="40" y="300" width="150" height="120" rx="16" class="node fill-soft"/>
+  <text x="115" y="352" text-anchor="middle" class="lbl ttl" font-size="16">Visitor</text>
+  <text x="115" y="376" text-anchor="middle" class="sub" font-size="12">browser</text>
+  <text x="115" y="395" text-anchor="middle" class="sub" font-size="12">desktop / mobile</text>
+
+  <!-- ===== Lane: App shell ===== -->
+  <rect x="230" y="100" width="290" height="540" rx="20" class="lane"/>
+  <text x="250" y="128" class="lane-lbl" font-size="12">NEXT.JS APP ROUTER</text>
+
+  <!-- ScrollProvider wrapper -->
+  <rect x="252" y="150" width="246" height="86" rx="14" class="node fill-soft"/>
+  <text x="375" y="186" text-anchor="middle" class="lbl ttl" font-size="15">ScrollProvider</text>
+  <text x="375" y="208" text-anchor="middle" class="sub" font-size="11.5">scroll-driven animation +</text>
+  <text x="375" y="224" text-anchor="middle" class="sub" font-size="11.5">in-view section tracking</text>
+
+  <!-- root layout -->
+  <rect x="252" y="252" width="246" height="58" rx="12" class="node fill-soft"/>
+  <text x="375" y="280" text-anchor="middle" class="lbl ttl" font-size="14">Root layout · Nav · Footer</text>
+  <text x="375" y="298" text-anchor="middle" class="sub" font-size="11.5">app/layout.tsx</text>
+
+  <!-- routes -->
+  <text x="375" y="338" text-anchor="middle" class="lane-lbl" font-size="11">ROUTES / PAGES</text>
+  <g font-size="13">
+    <rect x="252" y="350" width="118" height="44" rx="10" class="node fill-soft"/>
+    <text x="311" y="377" text-anchor="middle" class="lbl">Home</text>
+    <rect x="380" y="350" width="118" height="44" rx="10" class="node fill-soft"/>
+    <text x="439" y="377" text-anchor="middle" class="lbl">About</text>
+    <rect x="252" y="404" width="118" height="44" rx="10" class="node fill-soft"/>
+    <text x="311" y="431" text-anchor="middle" class="lbl">Services</text>
+    <rect x="380" y="404" width="118" height="44" rx="10" class="node fill-soft"/>
+    <text x="439" y="431" text-anchor="middle" class="lbl">Articles</text>
+    <rect x="252" y="458" width="246" height="44" rx="10" class="node fill-soft"/>
+    <text x="375" y="485" text-anchor="middle" class="lbl">Contact</text>
+  </g>
+
+  <!-- Contact form flow callout -->
+  <rect x="252" y="520" width="246" height="100" rx="12" class="node" stroke-dasharray="5 4" fill="none"/>
+  <text x="375" y="546" text-anchor="middle" class="lbl ttl" font-size="13">Contact form flow</text>
+  <text x="375" y="568" text-anchor="middle" class="sub" font-size="11.5">ContactForm · Input · TextArea</text>
+  <text x="375" y="586" text-anchor="middle" class="sub" font-size="11.5">validate → submit → confirmation</text>
+  <text x="375" y="606" text-anchor="middle" class="sub" font-size="11.5">Modal / Tooltip feedback</text>
+
+  <!-- ===== Lane: UI library ===== -->
+  <rect x="560" y="100" width="270" height="240" rx="20" class="lane"/>
+  <text x="580" y="128" class="lane-lbl" font-size="12">IN-HOUSE UI LIBRARY · src/ui</text>
+  <g font-size="11">
+    <rect x="576" y="146" width="118" height="40" rx="9" class="node fill-soft"/>
+    <text x="635" y="171" text-anchor="middle" class="lbl">Heading · Typography</text>
+    <rect x="700" y="146" width="118" height="40" rx="9" class="node fill-soft"/>
+    <text x="759" y="171" text-anchor="middle" class="lbl">Nav · MobileMenu</text>
+    <rect x="576" y="196" width="118" height="40" rx="9" class="node fill-soft"/>
+    <text x="635" y="221" text-anchor="middle" class="lbl">Modal · Tooltip</text>
+    <rect x="700" y="196" width="118" height="40" rx="9" class="node fill-soft"/>
+    <text x="759" y="221" text-anchor="middle" class="lbl">Input · TextArea</text>
+    <rect x="576" y="246" width="118" height="40" rx="9" class="node fill-soft"/>
+    <text x="635" y="271" text-anchor="middle" class="lbl">PulseButton · IconBtn</text>
+    <rect x="700" y="246" width="118" height="40" rx="9" class="node fill-soft"/>
+    <text x="759" y="271" text-anchor="middle" class="lbl">ContactCard · Footer</text>
+    <rect x="576" y="296" width="242" height="34" rx="9" class="node fill-soft"/>
+    <text x="697" y="318" text-anchor="middle" class="sub" font-size="11">UnfoldingDiv · InteractiveFigure · MultiColorDiv</text>
+  </g>
+
+  <!-- ===== Lane: Data-viz library (ACCENT — Brandon's highlight) ===== -->
+  <rect x="560" y="356" width="600" height="284" rx="20" class="accent-fill" fill-opacity="0.05"/>
+  <text x="580" y="384" class="accent-lbl" font-size="13" font-weight="700" letter-spacing="0.06em">★ CUSTOM DATA-VISUALIZATION LIBRARY (D3) · src/ui/Visualizations</text>
+  <text x="580" y="404" class="sub" font-size="11.5">Hand-built React + D3 chart components — a notable in-house capability, not a charting dependency.</text>
+
+  <g font-size="13">
+    <rect x="580" y="420" width="118" height="48" rx="10" class="accent-fill"/>
+    <text x="639" y="449" text-anchor="middle" class="accent-lbl">Area</text>
+    <rect x="708" y="420" width="118" height="48" rx="10" class="accent-fill"/>
+    <text x="767" y="449" text-anchor="middle" class="accent-lbl">Bar</text>
+    <rect x="836" y="420" width="118" height="48" rx="10" class="accent-fill"/>
+    <text x="895" y="449" text-anchor="middle" class="accent-lbl">Heatmap</text>
+    <rect x="964" y="420" width="118" height="48" rx="10" class="accent-fill"/>
+    <text x="1023" y="449" text-anchor="middle" class="accent-lbl">Radar</text>
+
+    <rect x="580" y="478" width="118" height="48" rx="10" class="accent-fill"/>
+    <text x="639" y="507" text-anchor="middle" class="accent-lbl">Tree</text>
+    <rect x="708" y="478" width="118" height="48" rx="10" class="accent-fill"/>
+    <text x="767" y="507" text-anchor="middle" class="accent-lbl">Treemap</text>
+    <rect x="836" y="478" width="118" height="48" rx="10" class="accent-fill"/>
+    <text x="895" y="507" text-anchor="middle" class="accent-lbl">Pie</text>
+    <rect x="964" y="478" width="118" height="48" rx="10" class="accent-fill"/>
+    <text x="1023" y="507" text-anchor="middle" class="accent-lbl">Radial</text>
+
+    <rect x="580" y="536" width="246" height="48" rx="10" class="accent-fill"/>
+    <text x="703" y="565" text-anchor="middle" class="accent-lbl">Delaunay</text>
+  </g>
+  <text x="850" y="612" text-anchor="middle" class="sub" font-size="12">Mounted into Services / Home / Articles to render real-time-dashboard &amp; analytics visuals.</text>
+
+  <!-- ===== Lane: Animation + assets ===== -->
+  <rect x="868" y="100" width="292" height="240" rx="20" class="lane"/>
+  <text x="888" y="128" class="lane-lbl" font-size="12">ANIMATION &amp; ASSETS</text>
+  <rect x="888" y="146" width="252" height="60" rx="12" class="node fill-soft"/>
+  <text x="1014" y="174" text-anchor="middle" class="lbl ttl" font-size="14">Framer Motion variants</text>
+  <text x="1014" y="194" text-anchor="middle" class="sub" font-size="11.5">fade / from-left / from-right / rise</text>
+  <rect x="888" y="216" width="252" height="52" rx="12" class="node fill-soft"/>
+  <text x="1014" y="240" text-anchor="middle" class="lbl ttl" font-size="14">Custom SVG icon set</text>
+  <text x="1014" y="258" text-anchor="middle" class="sub" font-size="11.5">src/icons — currentColor strokes</text>
+  <rect x="888" y="278" width="252" height="52" rx="12" class="node fill-soft"/>
+  <text x="1014" y="302" text-anchor="middle" class="lbl ttl" font-size="14">Static media</text>
+  <text x="1014" y="320" text-anchor="middle" class="sub" font-size="11.5">optimized webp / mp4 hero · public/</text>
+
+  <!-- ===== Connectors ===== -->
+  <!-- visitor -> app router -->
+  <path d="M190 360 H230" class="conn" marker-end="url(#cc-arrow)"/>
+  <!-- ScrollProvider -> layout -> routes (vertical implied within lane) -->
+  <path d="M375 236 V252" class="conn" marker-end="url(#cc-arrow)"/>
+  <path d="M375 310 V332" class="conn" marker-end="url(#cc-arrow)"/>
+  <!-- routes -> UI library -->
+  <path d="M498 372 H560" class="conn" marker-end="url(#cc-arrow)"/>
+  <!-- routes -> viz library (accent) -->
+  <path d="M498 480 C 528 480, 540 480, 560 480" class="conn-accent" marker-end="url(#cc-arrow-accent)"/>
+  <!-- UI library -> animation lane -->
+  <path d="M830 200 H868" class="conn" marker-end="url(#cc-arrow)"/>
+  <!-- UI library -> viz library (composition) -->
+  <path d="M820 340 V356" class="conn" stroke-dasharray="4 4" marker-end="url(#cc-arrow)"/>
+
+  <!-- Legend -->
+  <g font-size="12">
+    <rect x="40" y="470" width="176" height="150" rx="14" class="node" fill="none" stroke-opacity="0.4"/>
+    <text x="58" y="494" class="lane-lbl" font-size="11">LEGEND</text>
+    <rect x="58" y="506" width="22" height="16" rx="4" class="node fill-soft"/>
+    <text x="90" y="519" class="sub">app / UI module</text>
+    <rect x="58" y="532" width="22" height="16" rx="4" class="accent-fill"/>
+    <text x="90" y="545" class="accent-lbl">Brandon's custom viz</text>
+    <path d="M60 568 H80" class="conn" marker-end="url(#cc-arrow)"/>
+    <text x="90" y="572" class="sub">renders / data flow</text>
+    <path d="M60 594 H80" class="conn" stroke-dasharray="4 4"/>
+    <text x="90" y="598" class="sub">composes</text>
+  </g>
+  </g>
+</svg>

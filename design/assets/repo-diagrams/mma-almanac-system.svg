@@ -1,0 +1,135 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 768" fill="none"
+     font-family="ui-sans-serif, system-ui, sans-serif" role="img"
+     aria-labelledby="sysTitle sysDesc">
+  <title id="sysTitle">MMA Almanac — system overview</title>
+  <desc id="sysDesc">Four subsystems running on AWS ECS Fargate. Scrapers collect UFC and MMA
+    data into a shared PostgreSQL store; the AI/ML engine reads that data to produce predictions and
+    articles; the Next.js web UI serves predictions and articles to users. EventBridge schedules the
+    scrapers and model retraining.</desc>
+
+  <defs>
+    <!-- arrowhead in inherited text color (structural data flow) -->
+    <marker id="sysArrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" />
+    </marker>
+    <!-- scheduling arrowhead (accent) -->
+    <marker id="sysArrowAccent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--accent, #3B5BDB)" />
+    </marker>
+  </defs>
+
+  <!-- ===== Header band (clears the diagram body below) ===== -->
+  <text x="40" y="52" font-size="26" font-weight="700" fill="currentColor">MMA Almanac — Distributed ML Platform</text>
+  <text x="40" y="76" font-size="14" fill="currentColor" opacity="0.7">4 repositories, one data pipeline · scrape → store → predict → serve</text>
+
+  <!-- ===== Diagram body (shifted down to clear the header) ===== -->
+  <g transform="translate(0,40)">
+    <!-- AWS platform boundary -->
+    <rect x="40" y="92" width="1120" height="556" rx="20"
+          stroke="#FF9900" stroke-width="1.5" stroke-dasharray="6 6" fill="#FF9900" fill-opacity="0.05" />
+    <!-- boundary label, padded fully inside the box top-left corner -->
+    <rect x="64" y="108" width="226" height="40" rx="8" fill="#FF9900" fill-opacity="0.12" stroke="#FF9900" stroke-width="1.5" />
+    <text x="88" y="134" font-size="16" font-weight="700" fill="#FF9900">AWS · ECS Fargate</text>
+
+    <!-- 1. Scrapers -->
+    <g>
+      <rect x="80" y="250" width="220" height="150" rx="16"
+            stroke="var(--accent, #3B5BDB)" stroke-width="1.5" fill="var(--accent, #3B5BDB)" fill-opacity="0.10" />
+      <text x="190" y="284" text-anchor="middle" font-size="19" font-weight="700" fill="currentColor">Scrapers</text>
+      <text x="190" y="307" text-anchor="middle" font-size="12.5" fill="var(--accent, #3B5BDB)" font-weight="600">mma-almanac-scrapers</text>
+      <line x1="104" y1="320" x2="276" y2="320" stroke="currentColor" stroke-width="1" opacity="0.25" />
+      <text x="190" y="343" text-anchor="middle" font-size="14" fill="currentColor" opacity="0.85">Python · Playwright</text>
+      <text x="190" y="364" text-anchor="middle" font-size="14" fill="currentColor" opacity="0.85">Tor IP rotation</text>
+      <text x="190" y="385" text-anchor="middle" font-size="14" fill="currentColor" opacity="0.85">Sherdog / UFC sources</text>
+    </g>
+
+    <!-- 2. PostgreSQL (shared store) -->
+    <g>
+      <rect x="380" y="250" width="200" height="150" rx="16"
+            stroke="currentColor" stroke-width="1.5" fill="currentColor" fill-opacity="0.06" />
+      <g stroke="currentColor" stroke-width="1.5" fill="none">
+        <ellipse cx="480" cy="293" rx="34" ry="11" />
+        <path d="M446 293 v26 a34 11 0 0 0 68 0 v-26" />
+        <path d="M446 306 a34 11 0 0 0 68 0" />
+      </g>
+      <text x="480" y="350" text-anchor="middle" font-size="19" font-weight="700" fill="currentColor">PostgreSQL</text>
+      <text x="480" y="372" text-anchor="middle" font-size="13" fill="currentColor" opacity="0.75">shared data store</text>
+      <text x="480" y="390" text-anchor="middle" font-size="12.5" fill="currentColor" opacity="0.6">Prisma schema</text>
+    </g>
+
+    <!-- 3. AI / ML engine -->
+    <g>
+      <rect x="660" y="250" width="220" height="150" rx="16"
+            stroke="var(--accent, #3B5BDB)" stroke-width="1.5" fill="var(--accent, #3B5BDB)" fill-opacity="0.10" />
+      <text x="770" y="284" text-anchor="middle" font-size="19" font-weight="700" fill="currentColor">AI / ML Engine</text>
+      <text x="770" y="307" text-anchor="middle" font-size="12.5" fill="var(--accent, #3B5BDB)" font-weight="600">mma-almanac-ai</text>
+      <line x1="684" y1="320" x2="856" y2="320" stroke="currentColor" stroke-width="1" opacity="0.25" />
+      <text x="770" y="343" text-anchor="middle" font-size="14" fill="currentColor" opacity="0.85">3 × XGBoost models</text>
+      <text x="770" y="364" text-anchor="middle" font-size="14" fill="currentColor" opacity="0.85">Predictions API</text>
+      <text x="770" y="385" text-anchor="middle" font-size="14" fill="currentColor" opacity="0.85">OpenAI articles</text>
+    </g>
+
+    <!-- 4. Web UI -->
+    <g>
+      <rect x="960" y="250" width="180" height="150" rx="16"
+            stroke="var(--accent, #3B5BDB)" stroke-width="1.5" fill="var(--accent, #3B5BDB)" fill-opacity="0.10" />
+      <text x="1050" y="284" text-anchor="middle" font-size="19" font-weight="700" fill="currentColor">Web UI</text>
+      <text x="1050" y="307" text-anchor="middle" font-size="12" fill="var(--accent, #3B5BDB)" font-weight="600">mma-almanac-ui</text>
+      <line x1="984" y1="320" x2="1116" y2="320" stroke="currentColor" stroke-width="1" opacity="0.25" />
+      <text x="1050" y="343" text-anchor="middle" font-size="14" fill="currentColor" opacity="0.85">Next.js app</text>
+      <text x="1050" y="364" text-anchor="middle" font-size="14" fill="currentColor" opacity="0.85">predictions</text>
+      <text x="1050" y="385" text-anchor="middle" font-size="14" fill="currentColor" opacity="0.85">articles · stats</text>
+    </g>
+
+    <!-- Data-flow arrows (left → right) -->
+    <g stroke="currentColor" stroke-width="2" marker-end="url(#sysArrow)">
+      <line x1="300" y1="325" x2="372" y2="325" />
+      <line x1="580" y1="325" x2="652" y2="325" />
+      <line x1="880" y1="325" x2="952" y2="325" />
+    </g>
+    <g font-size="12.5" fill="currentColor" opacity="0.7" text-anchor="middle">
+      <text x="336" y="316">seed</text>
+      <text x="616" y="316">read</text>
+      <text x="916" y="316">serve</text>
+    </g>
+
+    <!-- Users (consumes the Web UI) -->
+    <g>
+      <circle cx="1050" cy="470" r="14" stroke="currentColor" stroke-width="1.5" fill="none" />
+      <path d="M1030 510 a20 20 0 0 1 40 0" stroke="currentColor" stroke-width="1.5" fill="none" />
+      <text x="1050" y="540" text-anchor="middle" font-size="14" font-weight="600" fill="currentColor">Users</text>
+    </g>
+    <line x1="1050" y1="400" x2="1050" y2="452" stroke="currentColor" stroke-width="2" marker-end="url(#sysArrow)" />
+
+    <!-- EventBridge scheduler (accent, top-down trigger) -->
+    <g>
+      <rect x="380" y="148" width="200" height="58" rx="14"
+            stroke="var(--accent, #3B5BDB)" stroke-width="1.5" fill="var(--accent, #3B5BDB)" fill-opacity="0.12" />
+      <text x="480" y="174" text-anchor="middle" font-size="15" font-weight="700" fill="currentColor">EventBridge</text>
+      <text x="480" y="194" text-anchor="middle" font-size="12.5" fill="var(--accent, #3B5BDB)" font-weight="600">scheduler</text>
+    </g>
+    <!-- schedule arrows: triggers scrapers + retraining -->
+    <g stroke="var(--accent, #3B5BDB)" stroke-width="1.75" stroke-dasharray="5 5" marker-end="url(#sysArrowAccent)" fill="none">
+      <path d="M392 206 q-180 22 -202 38" />
+      <path d="M568 206 q180 22 202 38" />
+    </g>
+    <g font-size="12" fill="var(--accent, #3B5BDB)" font-weight="600">
+      <text x="232" y="232">schedule scrapers</text>
+      <text x="612" y="232">trigger retraining</text>
+    </g>
+
+    <!-- Legend -->
+    <g font-size="13" fill="currentColor">
+      <rect x="80" y="592" width="18" height="14" rx="3" fill="var(--accent, #3B5BDB)" fill-opacity="0.12" stroke="var(--accent, #3B5BDB)" stroke-width="1.5" />
+      <text x="106" y="604">Brandon's services / repos</text>
+      <rect x="320" y="592" width="18" height="14" rx="3" fill="#FF9900" fill-opacity="0.12" stroke="#FF9900" stroke-width="1.5" />
+      <text x="346" y="604">AWS platform</text>
+      <rect x="500" y="592" width="18" height="14" rx="3" fill="currentColor" fill-opacity="0.06" stroke="currentColor" stroke-width="1.5" />
+      <text x="526" y="604">shared infrastructure</text>
+      <line x1="700" y1="599" x2="730" y2="599" stroke="currentColor" stroke-width="2" marker-end="url(#sysArrow)" />
+      <text x="740" y="604">data flow</text>
+      <line x1="828" y1="599" x2="858" y2="599" stroke="var(--accent, #3B5BDB)" stroke-width="1.75" stroke-dasharray="5 5" marker-end="url(#sysArrowAccent)" />
+      <text x="868" y="604">scheduled trigger</text>
+    </g>
+  </g>
+</svg>
