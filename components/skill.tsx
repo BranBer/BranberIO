@@ -30,7 +30,7 @@ const Skill: React.FC<SkillProps> = ({ Icon, iconText }) => {
         fontWeight: 500,
         transition: "color 150ms ease, border-color 150ms ease",
         cursor: "default",
-        whiteSpace: "nowrap",
+        whiteSpace: "normal",
       }}
       onMouseEnter={(e) => {
         (e.currentTarget as HTMLDivElement).style.color = "var(--fg)";

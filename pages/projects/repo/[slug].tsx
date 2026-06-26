@@ -217,21 +217,20 @@ const RepoDiagram: React.FC<{
   const Diagram = DIAGRAM_MAP[diagramSlug];
   if (!Diagram) return null;
   return (
-    <div
-      className="glass"
-      aria-label={label}
-      style={{
-        borderRadius: "var(--radius-xl)",
-        overflow: "hidden",
-        padding: "1.5rem",
-        /* Set color to --fg so currentColor in the SVG resolves to the themed
-           foreground — this is the critical step for dark/light theming. */
-        color: "var(--fg)",
-      }}
-    >
-      <Diagram
-        style={{ display: "block", width: "100%", height: "auto", maxWidth: "100%" }}
-      />
+    <div>
+      {/* Responsive scroll-container styles live in globals.css
+          (.diagram-scroll-wrapper / .diagram-scroll-hint) — see the note there
+          on why the ">" combinator can't sit in an inline <style>. */}
+      <div
+        className="glass diagram-scroll-wrapper"
+        aria-label={label}
+        role="img"
+      >
+        <Diagram style={{ display: "block" }} />
+      </div>
+      <p className="diagram-scroll-hint" aria-hidden="true">
+        Scroll to explore the diagram →
+      </p>
     </div>
   );
 };
@@ -433,7 +432,7 @@ const RepoDeepDive: NextPage<RepoDeepDiveProps> = ({ slug, detail, repoCard }) =
                 <span
                   style={{ fontSize: "var(--text-xs)", color: "var(--fg-subtle)" }}
                 >
-                  Last pushed {new Date(pushedAt).toLocaleDateString("en-US", { month: "short", year: "numeric" })}
+                  Last pushed {new Date(pushedAt).toLocaleDateString("en-US", { month: "short", year: "numeric", timeZone: "UTC" })}
                 </span>
               )}
               {topLangs.map((lang) => (

@@ -233,6 +233,35 @@ const Home: NextPage = () => {
           color: "var(--fg)",
         }}
       >
+        {/* Scoped responsive styles for the hero and selected-work grids */}
+        <style>{`
+          .hero-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: center;
+          }
+          @media (max-width: 640px) {
+            .hero-grid {
+              grid-template-columns: 1fr;
+            }
+            .hero-portrait {
+              order: -1;
+              max-height: 320px !important;
+              aspect-ratio: auto !important;
+            }
+          }
+          .selected-work-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 1.5rem;
+          }
+          @media (max-width: 640px) {
+            .selected-work-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+        `}</style>
         {/* ── 1. HERO BAND ─────────────────────────────────────────────── */}
         <section
           aria-label="Introduction"
@@ -244,12 +273,7 @@ const Home: NextPage = () => {
         >
           <motion.div
             {...motionProps}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "minmax(0, 3fr) minmax(0, 2fr)",
-              gap: "clamp(2rem, 4vw, 4rem)",
-              alignItems: "center",
-            }}
+            className="hero-grid"
           >
             {/* Left column — text + CTAs */}
             <div style={{ display: "flex", flexDirection: "column", gap: "var(--space-block)" }}>
@@ -439,7 +463,7 @@ const Home: NextPage = () => {
             {/* Right column — portrait in glass-strong frame */}
             <motion.div
               {...itemMotionProps}
-              className="glass-strong"
+              className="glass-strong hero-portrait"
               style={{
                 borderRadius: "var(--radius-xl)",
                 overflow: "hidden",
@@ -590,14 +614,8 @@ const Home: NextPage = () => {
               Selected work
             </motion.p>
 
-            {/* Asymmetric grid: first card wider */}
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "2fr 1fr",
-                gap: "1.5rem",
-              }}
-            >
+            {/* Asymmetric grid: first card wider; collapses to 1-col ≤640px */}
+            <div className="selected-work-grid">
               {/* Featured card — larger */}
               <motion.div
                 {...itemMotionProps}

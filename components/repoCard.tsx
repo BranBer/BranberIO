@@ -60,21 +60,19 @@ const PrivateBadge: React.FC = () => (
   </span>
 );
 
-/* ── Relative date helper ──────────────────────────────────────────────── */
+/* ── Date helper ───────────────────────────────────────────────────────────
+ * Absolute, UTC-pinned month/year. Using a fixed timeZone (and no "now"-based
+ * relative math) guarantees server-render and client-hydration produce the
+ * identical string — otherwise the month can flip across the build vs. browser
+ * timezone for repos pushed near a month boundary, causing a React hydration
+ * mismatch. Matches the deep-dive page's "Last pushed" format. */
 function formatPushedAt(iso: string): string {
   try {
-    const date = new Date(iso);
-    const now = new Date();
-    const diffMs = now.getTime() - date.getTime();
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-
-    if (diffDays === 0) return "today";
-    if (diffDays === 1) return "yesterday";
-    if (diffDays < 30) return `${diffDays}d ago`;
-    const diffMonths = Math.floor(diffDays / 30);
-    if (diffMonths < 12) return `${diffMonths}mo ago`;
-    const diffYears = Math.floor(diffDays / 365);
-    return `${diffYears}y ago`;
+    return new Date(iso).toLocaleDateString("en-US", {
+      month: "short",
+      year: "numeric",
+      timeZone: "UTC",
+    });
   } catch {
     return "";
   }

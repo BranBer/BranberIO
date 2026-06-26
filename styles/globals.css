@@ -184,3 +184,42 @@ a {
 .content-list > li::marker {
   color: var(--fg-subtle);
 }
+
+/* ─────────────────────────────────────────────
+   ARCHITECTURE DIAGRAM — responsive scroll container (deep-dive pages)
+   Lives here, NOT in an inline component <style>, because React HTML-escapes
+   the ">" child combinator to "&gt;" during SSR, which caused a hydration
+   text mismatch. In a real stylesheet the ">" is parsed normally.
+   ───────────────────────────────────────────── */
+.diagram-scroll-wrapper {
+  border-radius: var(--radius-xl);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 1.5rem;
+  color: var(--fg);
+}
+.diagram-scroll-wrapper svg,
+.diagram-scroll-wrapper > * {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+.diagram-scroll-hint {
+  display: none;
+  font-size: var(--text-xs);
+  color: var(--fg-subtle);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .diagram-scroll-wrapper svg,
+  .diagram-scroll-wrapper > * {
+    min-width: 760px;
+    width: auto;
+    max-width: none;
+  }
+  .diagram-scroll-hint {
+    display: block;
+  }
+}

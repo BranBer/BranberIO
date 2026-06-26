@@ -153,8 +153,8 @@ const Carousel: React.FC<CarouselProps> = ({ images, captions }) => {
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "2rem",
-              height: "2rem",
+              width: "2.75rem",
+              height: "2.75rem",
               borderRadius: "var(--radius-pill)",
               background: hasPrev ? "var(--glass-bg-chip)" : "transparent",
               border: "1px solid var(--glass-border)",
@@ -162,6 +162,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, captions }) => {
               cursor: hasPrev ? "pointer" : "default",
               opacity: hasPrev ? 1 : 0.4,
               padding: 0,
+              flexShrink: 0,
             }}
           >
             <ChevronLeftIcon />
@@ -191,8 +192,8 @@ const Carousel: React.FC<CarouselProps> = ({ images, captions }) => {
               display: "inline-flex",
               alignItems: "center",
               justifyContent: "center",
-              width: "2rem",
-              height: "2rem",
+              width: "2.75rem",
+              height: "2.75rem",
               borderRadius: "var(--radius-pill)",
               background: hasNext ? "var(--glass-bg-chip)" : "transparent",
               border: "1px solid var(--glass-border)",
@@ -200,6 +201,7 @@ const Carousel: React.FC<CarouselProps> = ({ images, captions }) => {
               cursor: hasNext ? "pointer" : "default",
               opacity: hasNext ? 1 : 0.4,
               padding: 0,
+              flexShrink: 0,
             }}
           >
             <ChevronRightIcon />

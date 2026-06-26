@@ -204,6 +204,24 @@ const About: NextPage = () => {
           color: "var(--fg)",
         }}
       >
+        {/* Scoped responsive styles — bio grid collapses at ≤640px */}
+        <style>{`
+          .about-bio-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+            gap: clamp(2rem, 4vw, 4rem);
+            align-items: start;
+          }
+          @media (max-width: 640px) {
+            .about-bio-grid {
+              grid-template-columns: 1fr;
+            }
+            .about-portrait {
+              max-height: 320px !important;
+              aspect-ratio: auto !important;
+            }
+          }
+        `}</style>
         {/* 1. BIO BLOCK */}
         <section
           aria-label="About Brandon"
@@ -215,16 +233,11 @@ const About: NextPage = () => {
         >
           <motion.div
             {...motionProps}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "minmax(0, 2fr) minmax(0, 3fr)",
-              gap: "clamp(2rem, 4vw, 4rem)",
-              alignItems: "start",
-            }}
+            className="about-bio-grid"
           >
             <motion.div
               {...itemMotion}
-              className="glass-strong"
+              className="glass-strong about-portrait"
               style={{
                 borderRadius: "var(--radius-xl)",
                 overflow: "hidden",

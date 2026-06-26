@@ -82,6 +82,19 @@ const Skills: NextPage = () => {
           color: "var(--fg)",
         }}
       >
+        {/* Scoped responsive styles — skills category grid collapses at ≤640px */}
+        <style>{`
+          .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 1.25rem;
+          }
+          @media (max-width: 640px) {
+            .skills-grid {
+              grid-template-columns: 1fr;
+            }
+          }
+        `}</style>
         {/* 1. INTRO */}
         <section
           aria-label="Skills introduction"
@@ -116,7 +129,7 @@ const Skills: NextPage = () => {
             paddingBottom: "var(--space-section)",
           }}
         >
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gap: "1.25rem" }}>
+          <div className="skills-grid">
             {skillCategories.map(([category, categorySkills]) => {
               const isFeature = FEATURE_CATEGORIES.has(category);
               return (
