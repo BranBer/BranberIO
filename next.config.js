@@ -1,15 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // WARNING: Every key listed in the `env` block below is inlined verbatim
-  // into the client-side JavaScript bundle at build time and shipped to every
-  // browser — regardless of the variable name (no NEXT_PUBLIC_ prefix needed).
-  // This means NO secrets (e.g. GITHUB_TOKEN, API keys, OAuth secrets) may
-  // ever be added here. Client-safe values only (public URLs, display prefs).
-  env: {
-    projects_per_page: process.env.projects_per_page,
-    api_url: process.env.api_url,
-  },
+  // NOTE: intentionally NO `env` block. Anything placed in Next's `env` is
+  // inlined into the client bundle and shipped to every browser — so secrets
+  // must never go there. The old `api_url` / `projects_per_page` keys were dead
+  // config (nothing read them) and were removed. Server-only secrets (the
+  // GitHub App credentials) are read via process.env directly in lib/github.ts.
   images: {
     domains: ["branberio.s3.us-east-2.amazonaws.com"],
   },
