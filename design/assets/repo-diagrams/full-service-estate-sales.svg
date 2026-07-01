@@ -1,0 +1,150 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" fill="none"
+     stroke="currentColor" color="currentColor" role="img"
+     aria-labelledby="fses-title fses-desc" font-family="ui-sans-serif, system-ui, sans-serif">
+  <title id="fses-title">Full-Service Estate Sales — Amplify Gen 2 subscribe and notify flow</title>
+  <desc id="fses-desc">A diagram of an estate-sales business site on AWS Amplify Gen 2. A public Next.js site
+    lets visitors subscribe for alerts; an admin dashboard (protected by Cognito auth) posts new estate
+    sales into the data layer. Three Lambda functions handle notifications: subscribe and unsubscribe
+    manage the subscriber list, and sendEstateSaleNotifications emails and texts subscribers when a new
+    sale is posted. The subscribe-to-notify flow is the spine of the diagram. AWS service nodes are in
+    AWS orange and the notification fan-out is highlighted in the accent color.</desc>
+
+  <defs>
+    <marker id="es-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" stroke="none"/>
+    </marker>
+    <marker id="es-arrow-aws" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#FF9900" stroke="none"/>
+    </marker>
+    <marker id="es-arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--accent, #3B5BDB)" stroke="none"/>
+    </marker>
+  </defs>
+
+  <style>
+    .fill-soft { fill: currentColor; fill-opacity:0.06; }
+    .lbl { fill: currentColor; stroke: none; }
+    .ttl { font-weight:700; }
+    .sub { fill: currentColor; fill-opacity:0.65; stroke:none; }
+    .lane { fill: currentColor; fill-opacity:0.03; stroke: currentColor; stroke-opacity:0.25; stroke-width:1; stroke-dasharray:3 4; }
+    .lane-lbl { fill: currentColor; fill-opacity:0.55; stroke:none; font-weight:600; letter-spacing:0.08em; }
+    .aws-fill { fill:#FF9900; fill-opacity:0.10; stroke:#FF9900; }
+    .aws-lbl { fill:#FF9900; stroke:none; }
+    .accent-fill { fill:var(--accent, #3B5BDB); fill-opacity:0.10; stroke:var(--accent, #3B5BDB); }
+    .accent-lbl { fill:var(--accent, #3B5BDB); stroke:none; }
+    .conn { stroke:currentColor; stroke-width:1.5; }
+    .conn-aws { stroke:#FF9900; stroke-width:1.5; }
+    .conn-accent { stroke:var(--accent, #3B5BDB); stroke-width:1.5; }
+  </style>
+
+  <text x="40" y="50" class="lbl ttl" font-size="26">Full-Service Estate Sales — Subscribe → Notify (Amplify Gen 2)</text>
+  <text x="40" y="78" class="sub" font-size="15">Public site + Cognito-protected admin → data layer → notification Lambdas → email / SMS fan-out</text>
+
+  <!-- Body (shifted down to clear the header block) -->
+  <g transform="translate(0,48)">
+  <!-- ===== Actors (left) ===== -->
+  <text x="60" y="120" class="lane-lbl" font-size="12">PUBLIC SITE · Next.js</text>
+  <rect x="40" y="140" width="220" height="92" rx="14" class="fill-soft" stroke="currentColor" stroke-width="1.5"/>
+  <text x="150" y="176" text-anchor="middle" class="lbl ttl" font-size="15">Visitor</text>
+  <text x="150" y="200" text-anchor="middle" class="sub" font-size="12">browses sales · hero, list</text>
+  <text x="150" y="220" text-anchor="middle" class="sub" font-size="12">SubscribeForm · unsubscribe page</text>
+
+  <text x="60" y="300" class="lane-lbl" font-size="12">ADMIN · /admin (auth-gated)</text>
+  <rect x="40" y="320" width="220" height="100" rx="14" class="fill-soft" stroke="currentColor" stroke-width="1.5"/>
+  <text x="150" y="356" text-anchor="middle" class="lbl ttl" font-size="15">Admin dashboard</text>
+  <text x="150" y="380" text-anchor="middle" class="sub" font-size="12">posts new estate sale</text>
+  <text x="150" y="400" text-anchor="middle" class="sub" font-size="12">AuthStatus · login flows</text>
+
+  <!-- Cognito guarding admin -->
+  <rect x="40" y="452" width="220" height="84" rx="14" class="aws-fill" stroke-width="1.5"/>
+  <text x="150" y="488" text-anchor="middle" class="aws-lbl ttl" font-size="15">Cognito</text>
+  <text x="150" y="510" text-anchor="middle" class="sub" font-size="12">auth/resource.ts · admin gate</text>
+  <path d="M150 452 V420" class="conn-aws" stroke-dasharray="4 4" marker-end="url(#es-arrow-aws)"/>
+  <text x="190" y="442" class="sub" font-size="10.5" font-style="italic">protects</text>
+
+  <!-- ===== Amplify backend ===== -->
+  <rect x="300" y="100" width="500" height="540" rx="24" stroke="#FF9900" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="6 5" fill="none"/>
+  <text x="326" y="130" class="aws-lbl" font-size="13" font-weight="700" letter-spacing="0.05em">AWS AMPLIFY GEN 2 · amplify/backend.ts</text>
+
+  <!-- Data layer -->
+  <rect x="326" y="150" width="448" height="150" rx="16" class="aws-fill" stroke-width="1.5" fill-opacity="0.05"/>
+  <text x="346" y="178" class="aws-lbl" font-size="12" font-weight="700">DATA LAYER · data/resource.ts (AppSync + DynamoDB)</text>
+  <rect x="346" y="194" width="200" height="92" rx="12" class="aws-fill" stroke-width="1.5"/>
+  <text x="446" y="232" text-anchor="middle" class="aws-lbl ttl" font-size="15">EstateSale records</text>
+  <text x="446" y="254" text-anchor="middle" class="sub" font-size="12">sales catalog</text>
+  <rect x="558" y="194" width="200" height="92" rx="12" class="aws-fill" stroke-width="1.5"/>
+  <text x="658" y="232" text-anchor="middle" class="aws-lbl ttl" font-size="15">Subscriber list</text>
+  <text x="658" y="254" text-anchor="middle" class="sub" font-size="12">email / phone contacts</text>
+
+  <!-- Notification Lambdas -->
+  <text x="346" y="338" class="lane-lbl" font-size="12">NOTIFICATION LAMBDA FUNCTIONS · amplify/functions</text>
+  <rect x="326" y="352" width="220" height="84" rx="13" class="aws-fill" stroke-width="1.5"/>
+  <text x="436" y="386" text-anchor="middle" class="aws-lbl ttl" font-size="15">subscribe λ</text>
+  <text x="436" y="408" text-anchor="middle" class="sub" font-size="12">adds contact to list</text>
+
+  <rect x="554" y="352" width="220" height="84" rx="13" class="aws-fill" stroke-width="1.5"/>
+  <text x="664" y="386" text-anchor="middle" class="aws-lbl ttl" font-size="15">unsubscribe λ</text>
+  <text x="664" y="408" text-anchor="middle" class="sub" font-size="12">removes contact</text>
+
+  <rect x="326" y="456" width="448" height="150" rx="16" class="accent-fill" stroke-width="1.5"/>
+  <text x="550" y="492" text-anchor="middle" class="accent-lbl ttl" font-size="16">sendEstateSaleNotifications λ</text>
+  <text x="550" y="516" text-anchor="middle" class="sub" font-size="12.5">triggered when a new estate sale is posted</text>
+  <text x="550" y="538" text-anchor="middle" class="sub" font-size="12.5">reads subscriber list → composes message</text>
+  <text x="550" y="568" text-anchor="middle" class="accent-lbl" font-size="12.5" font-style="italic">fans out email + SMS to every subscriber</text>
+
+  <!-- ===== Right: delivery + subscribers ===== -->
+  <text x="860" y="120" class="lane-lbl" font-size="12">DELIVERY</text>
+  <rect x="840" y="456" width="150" height="150" rx="16" class="accent-fill" stroke-width="1.5"/>
+  <text x="915" y="500" text-anchor="middle" class="accent-lbl ttl" font-size="15">Email</text>
+  <text x="915" y="524" text-anchor="middle" class="sub" font-size="12">SES / mail</text>
+  <rect x="1010" y="456" width="150" height="150" rx="16" class="accent-fill" stroke-width="1.5"/>
+  <text x="1085" y="500" text-anchor="middle" class="accent-lbl ttl" font-size="15">SMS</text>
+  <text x="1085" y="524" text-anchor="middle" class="sub" font-size="12">SNS / text</text>
+
+  <rect x="840" y="150" width="320" height="150" rx="16" class="fill-soft" stroke="currentColor" stroke-width="1.5"/>
+  <text x="1000" y="200" text-anchor="middle" class="lbl ttl" font-size="16">Subscribers</text>
+  <text x="1000" y="228" text-anchor="middle" class="sub" font-size="12.5">receive "new estate sale" alerts</text>
+  <text x="1000" y="252" text-anchor="middle" class="sub" font-size="12.5">opt in via SubscribeForm,</text>
+  <text x="1000" y="272" text-anchor="middle" class="sub" font-size="12.5">opt out via unsubscribe page</text>
+
+  <!-- ===== Flow connectors (the spine) ===== -->
+  <!-- visitor subscribe -> subscribe lambda -->
+  <path d="M260 186 C 290 186, 300 386, 326 386" class="conn-aws" marker-end="url(#es-arrow-aws)"/>
+  <text x="325" y="300" text-anchor="middle" class="sub" font-size="10.5">subscribe</text>
+  <!-- subscribe lambda -> subscriber list -->
+  <path d="M546 372 C 600 372, 640 300, 658 286" class="conn-aws" marker-end="url(#es-arrow-aws)"/>
+  <!-- unsubscribe lambda -> subscriber list -->
+  <path d="M700 352 C 700 320, 680 300, 670 286" class="conn-aws" stroke-dasharray="4 4" marker-end="url(#es-arrow-aws)"/>
+  <!-- admin posts sale -> EstateSale records -->
+  <path d="M260 350 C 300 350, 410 286, 446 286" class="conn-aws" marker-end="url(#es-arrow-aws)"/>
+  <text x="345" y="318" text-anchor="middle" class="sub" font-size="10.5">post sale</text>
+  <!-- EstateSale new record -> triggers notify lambda -->
+  <path d="M446 286 C 446 360, 446 410, 470 456" class="conn-accent" marker-end="url(#es-arrow-accent)"/>
+  <text x="406" y="430" text-anchor="middle" class="accent-lbl" font-size="10.5">on new sale</text>
+  <!-- notify lambda reads subscriber list -->
+  <path d="M658 286 C 700 330, 690 440, 640 456" class="conn-accent" stroke-dasharray="4 4" marker-end="url(#es-arrow-accent)"/>
+  <text x="722" y="380" text-anchor="middle" class="accent-lbl" font-size="10">read list</text>
+  <!-- notify -> email / SMS -->
+  <path d="M774 540 C 810 540, 818 530, 840 530" class="conn-accent" marker-end="url(#es-arrow-accent)"/>
+  <path d="M990 530 H1010" class="conn-accent" marker-end="url(#es-arrow-accent)"/>
+  <!-- email/SMS -> subscribers -->
+  <path d="M915 456 C 915 380, 980 320, 1000 300" class="conn-accent" marker-end="url(#es-arrow-accent)"/>
+  <path d="M1085 456 C 1085 380, 1040 320, 1010 302" class="conn-accent" marker-end="url(#es-arrow-accent)"/>
+
+  <!-- Legend -->
+  <g font-size="12">
+    <rect x="840" y="320" width="320" height="118" rx="14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-opacity="0.4"/>
+    <text x="858" y="344" class="lane-lbl" font-size="11">LEGEND</text>
+    <rect x="858" y="356" width="22" height="16" rx="4" class="fill-soft" stroke="currentColor" stroke-width="1.5"/>
+    <text x="890" y="369" class="sub">site / actor</text>
+    <rect x="1010" y="356" width="22" height="16" rx="4" class="aws-fill" stroke-width="1.5"/>
+    <text x="1042" y="369" class="aws-lbl">AWS / Amplify</text>
+    <rect x="858" y="382" width="22" height="16" rx="4" class="accent-fill" stroke-width="1.5"/>
+    <text x="890" y="395" class="accent-lbl">notify fan-out</text>
+    <path d="M860 416 H880" class="conn-aws" marker-end="url(#es-arrow-aws)"/>
+    <text x="890" y="420" class="sub">data flow</text>
+    <path d="M1010 416 H1030" class="conn-accent" marker-end="url(#es-arrow-accent)"/>
+    <text x="1042" y="420" class="accent-lbl">notification</text>
+  </g>
+  </g>
+</svg>

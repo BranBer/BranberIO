@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" fill="none"
+     stroke="currentColor" color="currentColor" role="img"
+     aria-labelledby="jl-title jl-desc" font-family="ui-sans-serif, system-ui, sans-serif">
+  <title id="jl-title">Journilog — AI journaling app on AWS Amplify Gen 2</title>
+  <desc id="jl-desc">A left-to-right diagram of Journilog, an AI journaling app. A Next.js App Router client
+    (Redux state, PIN-lock privacy, rich-text journal editor) talks to an AWS Amplify Gen 2 backend.
+    Cognito handles auth; an AppSync GraphQL API backed by DynamoDB handles data; two Lambda functions
+    run server logic — an entry helper and a GPT/OpenAI-powered insights function that calls the external
+    OpenAI API. AWS service nodes are marked in AWS orange; the OpenAI integration is highlighted in the
+    accent color.</desc>
+
+  <defs>
+    <marker id="jl-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" stroke="none"/>
+    </marker>
+    <marker id="jl-arrow-aws" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#FF9900" stroke="none"/>
+    </marker>
+    <marker id="jl-arrow-accent" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="var(--accent, #3B5BDB)" stroke="none"/>
+    </marker>
+  </defs>
+
+  <style>
+    .fill-soft { fill: currentColor; fill-opacity:0.06; }
+    .lbl { fill: currentColor; stroke: none; }
+    .ttl { font-weight:700; }
+    .sub { fill: currentColor; fill-opacity:0.65; stroke:none; }
+    .lane { fill: currentColor; fill-opacity:0.03; stroke: currentColor; stroke-opacity:0.25; stroke-width:1; stroke-dasharray:3 4; }
+    .lane-lbl { fill: currentColor; fill-opacity:0.55; stroke:none; font-weight:600; letter-spacing:0.08em; }
+    .aws-fill { fill:#FF9900; fill-opacity:0.10; stroke:#FF9900; }
+    .aws-lbl { fill:#FF9900; stroke:none; }
+    .accent-fill { fill:var(--accent, #3B5BDB); fill-opacity:0.10; stroke:var(--accent, #3B5BDB); }
+    .accent-lbl { fill:var(--accent, #3B5BDB); stroke:none; }
+    .conn { stroke:currentColor; stroke-width:1.5; }
+    .conn-aws { stroke:#FF9900; stroke-width:1.5; }
+    .conn-accent { stroke:var(--accent, #3B5BDB); stroke-width:1.5; }
+  </style>
+
+  <text x="40" y="50" class="lbl ttl" font-size="26">Journilog — AI Journaling on AWS Amplify Gen 2</text>
+  <text x="40" y="78" class="sub" font-size="15">Next.js client → Cognito auth → AppSync GraphQL + DynamoDB → Lambda (entry helper + GPT insights)</text>
+
+  <!-- Body (shifted down to clear the header block) -->
+  <g transform="translate(0,48)">
+  <!-- ===== Client lane ===== -->
+  <rect x="40" y="100" width="300" height="540" rx="20" class="lane"/>
+  <text x="60" y="128" class="lane-lbl" font-size="12">CLIENT · Next.js App Router</text>
+
+  <rect x="62" y="146" width="256" height="74" rx="13" class="fill-soft" stroke="currentColor" stroke-width="1.5"/>
+  <text x="190" y="180" text-anchor="middle" class="lbl ttl" font-size="15">PIN lock · privacy gate</text>
+  <text x="190" y="202" text-anchor="middle" class="sub" font-size="11.5">unlocks journal before render</text>
+
+  <rect x="62" y="232" width="256" height="86" rx="13" class="fill-soft" stroke="currentColor" stroke-width="1.5"/>
+  <text x="190" y="266" text-anchor="middle" class="lbl ttl" font-size="15">Rich-text journal editor</text>
+  <text x="190" y="288" text-anchor="middle" class="sub" font-size="11.5">TipTap-style editor · toolbar</text>
+  <text x="190" y="306" text-anchor="middle" class="sub" font-size="11.5">tables · markdown</text>
+
+  <rect x="62" y="330" width="256" height="74" rx="13" class="fill-soft" stroke="currentColor" stroke-width="1.5"/>
+  <text x="190" y="364" text-anchor="middle" class="lbl ttl" font-size="15">Redux store</text>
+  <text x="190" y="386" text-anchor="middle" class="sub" font-size="11.5">journalEntries · api reducers</text>
+
+  <rect x="62" y="416" width="256" height="74" rx="13" class="fill-soft" stroke="currentColor" stroke-width="1.5"/>
+  <text x="190" y="450" text-anchor="middle" class="lbl ttl" font-size="15">Insights view</text>
+  <text x="190" y="472" text-anchor="middle" class="sub" font-size="11.5">AI reflections · InsightLoader</text>
+
+  <rect x="62" y="502" width="256" height="118" rx="13" class="fill-soft" stroke="currentColor" stroke-width="1.5"/>
+  <text x="190" y="534" text-anchor="middle" class="lbl ttl" font-size="14">AuthProvider · AuthGuard</text>
+  <text x="190" y="556" text-anchor="middle" class="sub" font-size="11.5">login / register / reset flows</text>
+  <text x="190" y="576" text-anchor="middle" class="sub" font-size="11.5">ConfigureAmplify (Gen 2 client)</text>
+  <text x="190" y="600" text-anchor="middle" class="sub" font-size="11.5">in-house UI lib + SVG icons</text>
+
+  <!-- ===== Amplify backend region ===== -->
+  <rect x="380" y="100" width="600" height="540" rx="24" stroke="#FF9900" stroke-width="1.5" stroke-opacity="0.45" stroke-dasharray="6 5" fill="none"/>
+  <text x="406" y="130" class="aws-lbl" font-size="13" font-weight="700" letter-spacing="0.05em">AWS AMPLIFY GEN 2 BACKEND · amplify/backend.ts</text>
+
+  <!-- Cognito -->
+  <rect x="406" y="150" width="248" height="100" rx="16" class="aws-fill" stroke-width="1.5"/>
+  <text x="530" y="190" text-anchor="middle" class="aws-lbl ttl" font-size="17">Cognito</text>
+  <text x="530" y="216" text-anchor="middle" class="sub" font-size="12">auth/resource.ts</text>
+  <text x="530" y="236" text-anchor="middle" class="sub" font-size="12">user pool · sign-in · tokens</text>
+
+  <!-- AppSync + DynamoDB -->
+  <rect x="406" y="270" width="248" height="170" rx="16" class="aws-fill" stroke-width="1.5" fill-opacity="0.05"/>
+  <text x="530" y="300" text-anchor="middle" class="aws-lbl ttl" font-size="16">AppSync · GraphQL</text>
+  <text x="530" y="322" text-anchor="middle" class="sub" font-size="12">data/resource.ts schema</text>
+  <rect x="430" y="340" width="200" height="82" rx="12" class="aws-fill" stroke-width="1.5"/>
+  <text x="530" y="376" text-anchor="middle" class="aws-lbl ttl" font-size="15">DynamoDB</text>
+  <text x="530" y="398" text-anchor="middle" class="sub" font-size="12">journal entries store</text>
+
+  <!-- Lambda functions -->
+  <text x="690" y="478" class="lane-lbl" font-size="11">LAMBDA FUNCTIONS</text>
+  <rect x="690" y="270" width="270" height="80" rx="14" class="aws-fill" stroke-width="1.5"/>
+  <text x="825" y="306" text-anchor="middle" class="aws-lbl ttl" font-size="15">entryHelper λ</text>
+  <text x="825" y="328" text-anchor="middle" class="sub" font-size="12">functions/entryHelper · entry assist</text>
+
+  <rect x="690" y="362" width="270" height="100" rx="14" class="aws-fill" stroke-width="1.5"/>
+  <text x="825" y="396" text-anchor="middle" class="aws-lbl ttl" font-size="15">gpt insights λ</text>
+  <text x="825" y="418" text-anchor="middle" class="sub" font-size="12">functions/gpt · queries entries</text>
+  <text x="825" y="438" text-anchor="middle" class="sub" font-size="12">via GraphQL → builds prompt</text>
+
+  <!-- ===== OpenAI (accent — external AI) ===== -->
+  <rect x="1010" y="362" width="150" height="100" rx="16" class="accent-fill" stroke-width="1.5"/>
+  <text x="1085" y="402" text-anchor="middle" class="accent-lbl ttl" font-size="15">OpenAI</text>
+  <text x="1085" y="424" text-anchor="middle" class="sub" font-size="12">GPT API</text>
+  <text x="1085" y="444" text-anchor="middle" class="accent-lbl" font-size="11" font-style="italic">external</text>
+
+  <!-- ===== Connectors ===== -->
+  <!-- client -> cognito (auth) -->
+  <path d="M318 200 C 360 200, 372 200, 406 200" class="conn-aws" marker-end="url(#jl-arrow-aws)"/>
+  <text x="362" y="186" text-anchor="middle" class="sub" font-size="10.5">auth</text>
+  <!-- client editor/redux -> appsync (data) -->
+  <path d="M318 290 C 350 290, 372 340, 406 340" class="conn-aws" marker-end="url(#jl-arrow-aws)"/>
+  <text x="360" y="320" text-anchor="middle" class="sub" font-size="10.5">GraphQL data</text>
+  <!-- cognito authorizes appsync -->
+  <path d="M530 250 V270" class="conn-aws" stroke-dasharray="4 4" marker-end="url(#jl-arrow-aws)"/>
+  <text x="566" y="266" class="sub" font-size="10" font-style="italic">authorizes</text>
+  <!-- appsync -> lambdas (resolvers) -->
+  <path d="M654 310 H690" class="conn-aws" marker-end="url(#jl-arrow-aws)"/>
+  <path d="M654 400 C 670 400, 676 410, 690 410" class="conn-aws" marker-end="url(#jl-arrow-aws)"/>
+  <text x="672" y="296" text-anchor="middle" class="sub" font-size="10">resolvers</text>
+  <!-- gpt lambda queries graphql back -->
+  <path d="M690 430 C 660 430, 640 412, 630 412" class="conn-aws" stroke-dasharray="4 4" marker-end="url(#jl-arrow-aws)"/>
+  <!-- gpt lambda -> OpenAI (accent) -->
+  <path d="M960 412 H1010" class="conn-accent" marker-end="url(#jl-arrow-accent)"/>
+  <text x="985" y="400" text-anchor="middle" class="accent-lbl" font-size="10">prompt</text>
+  <!-- insights result back to client (data) -->
+  <path d="M690 320 C 480 320, 360 455, 318 455" class="conn-aws" stroke-dasharray="4 4" marker-end="url(#jl-arrow-aws)"/>
+
+  <!-- Legend -->
+  <g font-size="12">
+    <rect x="406" y="478" width="270" height="150" rx="14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-opacity="0.4"/>
+    <text x="424" y="502" class="lane-lbl" font-size="11">LEGEND</text>
+    <rect x="424" y="514" width="22" height="16" rx="4" class="fill-soft" stroke="currentColor" stroke-width="1.5"/>
+    <text x="456" y="527" class="sub">client module</text>
+    <rect x="424" y="540" width="22" height="16" rx="4" class="aws-fill" stroke-width="1.5"/>
+    <text x="456" y="553" class="aws-lbl">AWS / Amplify service</text>
+    <rect x="424" y="566" width="22" height="16" rx="4" class="accent-fill" stroke-width="1.5"/>
+    <text x="456" y="579" class="accent-lbl">external AI (OpenAI)</text>
+    <path d="M426 600 H446" class="conn-aws" marker-end="url(#jl-arrow-aws)"/>
+    <text x="456" y="604" class="sub">request / data flow</text>
+    <path d="M426 622 H446" class="conn-aws" stroke-dasharray="4 4"/>
+    <text x="456" y="626" class="sub">authorizes / returns</text>
+  </g>
+  </g>
+</svg>

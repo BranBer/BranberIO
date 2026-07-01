@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" fill="none"
+     stroke="currentColor" color="currentColor" role="img"
+     aria-labelledby="awsmod-title awsmod-desc" font-family="ui-sans-serif, system-ui, sans-serif">
+  <title id="awsmod-title">aws-modules — reusable Terraform module library</title>
+  <desc id="awsmod-desc">A diagram of a reusable Terraform module library with two modules shown as
+    building blocks. The cloudfront-s3 module provisions static hosting: an S3 bucket, a CloudFront
+    distribution, Route 53 DNS, and an ACM SSL certificate. The codebuild-pipeline module provisions
+    CI/CD: an AWS CodeBuild project with an IAM service role. Consuming Terraform stacks reference both
+    modules. AWS service nodes are marked in AWS orange.</desc>
+
+  <defs>
+    <marker id="am-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="currentColor" stroke="none"/>
+    </marker>
+    <marker id="am-arrow-aws" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#FF9900" stroke="none"/>
+    </marker>
+  </defs>
+
+  <style>
+    .fill-soft { fill: currentColor; fill-opacity:0.06; }
+    .lbl { fill: currentColor; stroke: none; }
+    .ttl { font-weight:700; }
+    .sub { fill: currentColor; fill-opacity:0.65; stroke:none; }
+    .lane-lbl { fill: currentColor; fill-opacity:0.55; stroke:none; font-weight:600; letter-spacing:0.08em; }
+    .module { fill: currentColor; fill-opacity:0.04; stroke: currentColor; stroke-width:1.5; }
+    .aws-fill { fill:#FF9900; fill-opacity:0.10; stroke:#FF9900; }
+    .aws-lbl { fill:#FF9900; stroke:none; }
+    .conn { stroke:currentColor; stroke-width:1.5; }
+    .conn-aws { stroke:#FF9900; stroke-width:1.5; }
+  </style>
+
+  <text x="40" y="50" class="lbl ttl" font-size="26">aws-modules — Reusable Terraform Modules</text>
+  <text x="40" y="78" class="sub" font-size="15">Two composable building blocks consumed by any stack: static hosting + CI/CD pipeline.</text>
+
+  <!-- Body (shifted down to clear the header block) -->
+  <g transform="translate(0,48)">
+  <!-- ===== Consumer ===== -->
+  <text x="60" y="124" class="lane-lbl" font-size="12">CONSUMING STACK</text>
+  <rect x="40" y="300" width="190" height="150" rx="16" class="fill-soft" stroke="currentColor" stroke-width="1.5"/>
+  <text x="135" y="356" text-anchor="middle" class="lbl ttl" font-size="16">module "…" { }</text>
+  <text x="135" y="384" text-anchor="middle" class="sub" font-size="12.5">root Terraform stack</text>
+  <text x="135" y="404" text-anchor="middle" class="sub" font-size="12.5">references modules,</text>
+  <text x="135" y="422" text-anchor="middle" class="sub" font-size="12.5">passes variables</text>
+  <text x="135" y="466" text-anchor="middle" class="sub" font-size="11.5" font-style="italic">required vars: bucket_name,</text>
+  <text x="135" y="484" text-anchor="middle" class="sub" font-size="11.5" font-style="italic">comment, domain_name</text>
+
+  <path d="M230 340 C 270 340, 280 220, 320 220" class="conn" marker-end="url(#am-arrow)"/>
+  <path d="M230 410 C 270 410, 280 510, 320 510" class="conn" marker-end="url(#am-arrow)"/>
+
+  <!-- ===== Module 1: cloudfront-s3 ===== -->
+  <rect x="320" y="106" width="840" height="240" rx="22" class="module"/>
+  <text x="346" y="138" class="lane-lbl" font-size="13" font-weight="700">MODULE · cloudfront-s3 — static site hosting</text>
+  <text x="346" y="158" class="sub" font-size="11.5">files: s3.tf · cloudfront.tf · route53.tf · ssl.tf · variables.tf · outputs.tf · locals.tf</text>
+
+  <g font-size="15">
+    <rect x="346" y="178" width="180" height="140" rx="14" class="aws-fill" stroke-width="1.5"/>
+    <text x="436" y="232" text-anchor="middle" class="aws-lbl ttl">S3</text>
+    <text x="436" y="258" text-anchor="middle" class="sub" font-size="12">origin bucket</text>
+    <text x="436" y="278" text-anchor="middle" class="sub" font-size="12">site files</text>
+
+    <rect x="546" y="178" width="180" height="140" rx="14" class="aws-fill" stroke-width="1.5"/>
+    <text x="636" y="232" text-anchor="middle" class="aws-lbl ttl">CloudFront</text>
+    <text x="636" y="258" text-anchor="middle" class="sub" font-size="12">CDN distribution</text>
+    <text x="636" y="278" text-anchor="middle" class="sub" font-size="12">edge caching</text>
+
+    <rect x="746" y="178" width="180" height="140" rx="14" class="aws-fill" stroke-width="1.5"/>
+    <text x="836" y="232" text-anchor="middle" class="aws-lbl ttl">Route 53</text>
+    <text x="836" y="258" text-anchor="middle" class="sub" font-size="12">DNS records</text>
+    <text x="836" y="278" text-anchor="middle" class="sub" font-size="12">domain → CDN</text>
+
+    <rect x="946" y="178" width="190" height="140" rx="14" class="aws-fill" stroke-width="1.5"/>
+    <text x="1041" y="232" text-anchor="middle" class="aws-lbl ttl">ACM · SSL</text>
+    <text x="1041" y="258" text-anchor="middle" class="sub" font-size="12">TLS certificate</text>
+    <text x="1041" y="278" text-anchor="middle" class="sub" font-size="12">https on distribution</text>
+  </g>
+  <!-- internal flow -->
+  <path d="M526 248 H546" class="conn-aws" marker-end="url(#am-arrow-aws)"/>
+  <path d="M726 248 H746" class="conn-aws" marker-end="url(#am-arrow-aws)"/>
+  <path d="M926 248 H946" class="conn-aws" marker-end="url(#am-arrow-aws)"/>
+
+  <!-- ===== Module 2: codebuild-pipeline ===== -->
+  <rect x="320" y="396" width="840" height="240" rx="22" class="module"/>
+  <text x="346" y="428" class="lane-lbl" font-size="13" font-weight="700">MODULE · codebuild-pipeline — CI/CD build</text>
+  <text x="346" y="448" class="sub" font-size="11.5">files: codebuild.tf · iam.tf · data.tf · variables.tf</text>
+
+  <g font-size="15">
+    <rect x="346" y="470" width="280" height="140" rx="14" class="aws-fill" stroke-width="1.5"/>
+    <text x="486" y="524" text-anchor="middle" class="aws-lbl ttl">CodeBuild</text>
+    <text x="486" y="550" text-anchor="middle" class="sub" font-size="12">build project</text>
+    <text x="486" y="570" text-anchor="middle" class="sub" font-size="12">buildspec · source → artifact</text>
+
+    <rect x="660" y="470" width="280" height="140" rx="14" class="aws-fill" stroke-width="1.5"/>
+    <text x="800" y="524" text-anchor="middle" class="aws-lbl ttl">IAM</text>
+    <text x="800" y="550" text-anchor="middle" class="sub" font-size="12">CodeBuild service role</text>
+    <text x="800" y="570" text-anchor="middle" class="sub" font-size="12">+ build permissions policy</text>
+  </g>
+  <!-- IAM grants CodeBuild -->
+  <path d="M660 540 H626" class="conn-aws" stroke-dasharray="4 4" marker-end="url(#am-arrow-aws)"/>
+  <text x="643" y="500" text-anchor="middle" class="sub" font-size="11" font-style="italic">assumes</text>
+  <!-- data.tf note -->
+  <rect x="978" y="470" width="158" height="140" rx="14" class="fill-soft" stroke="currentColor" stroke-width="1.5"/>
+  <text x="1057" y="520" text-anchor="middle" class="lbl ttl" font-size="14">data.tf</text>
+  <text x="1057" y="544" text-anchor="middle" class="sub" font-size="11.5">account / region</text>
+  <text x="1057" y="562" text-anchor="middle" class="sub" font-size="11.5">lookups</text>
+
+  <!-- Legend -->
+  <g font-size="12">
+    <rect x="40" y="496" width="190" height="158" rx="14" stroke="currentColor" stroke-width="1.5" fill="none" stroke-opacity="0.4"/>
+    <text x="58" y="520" class="lane-lbl" font-size="11">LEGEND</text>
+    <rect x="58" y="532" width="22" height="16" rx="4" class="module"/>
+    <text x="90" y="545" class="sub">reusable module</text>
+    <rect x="58" y="558" width="22" height="16" rx="4" class="aws-fill" stroke-width="1.5"/>
+    <text x="90" y="571" class="aws-lbl">AWS resource</text>
+    <path d="M60 594 H80" class="conn" marker-end="url(#am-arrow)"/>
+    <text x="90" y="598" class="sub">references module</text>
+    <path d="M60 620 H80" class="conn-aws" marker-end="url(#am-arrow-aws)"/>
+    <text x="90" y="624" class="sub">provisions / flow</text>
+    <path d="M60 644 H80" class="conn-aws" stroke-dasharray="4 4"/>
+    <text x="90" y="648" class="sub">grants access</text>
+  </g>
+  </g>
+</svg>

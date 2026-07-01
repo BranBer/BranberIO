@@ -1,11 +1,161 @@
-@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html,
-body {
+/* ─────────────────────────────────────────────
+   TOKEN LAYER: light (default) on :root
+   ───────────────────────────────────────────── */
+:root {
+  /* Color tokens */
+  --bg: #F4F6FB;
+  --fg: #10131C;
+  --fg-muted: #3A4154;
+  --fg-subtle: #5C6478;
+  --surface: #FFFFFF;
+  --surface-raised: #FFFFFF;
+  --accent: #3B5BDB;
+  --accent-fg: #FFFFFF;
+  --accent-hover: #2F49B8;
+  --success: #1E7F4F;
+  --warning: #9A6B00;
+  --ring: #3B5BDB;
+
+  /* Glass surface tokens */
+  --glass-bg: rgb(255 255 255 / 0.55);
+  --glass-bg-strong: rgb(255 255 255 / 0.72);
+  --glass-bg-chip: rgb(255 255 255 / 0.40);
+  --glass-border: rgb(255 255 255 / 0.65);
+  --glass-highlight: rgb(255 255 255 / 0.85);
+  --glass-shadow: 0 8px 30px rgb(16 19 28 / 0.10);
+  --glass-blur: 14px;
+  --glass-blur-strong: 20px;
+  --scrim: rgb(244 246 251 / 0.55);
+
+  /* Typography scale */
+  --text-display: clamp(2.5rem, 5vw, 3.5rem);
+  --text-h1: clamp(1.75rem, 3vw, 2.25rem);
+  --text-h2: 1.5rem;
+  --text-h3: 1.25rem;
+  --text-lead: 1.25rem;
+  --text-body: 1rem;
+  --text-sm: 0.875rem;
+  --text-xs: 0.75rem;
+
+  /* Spacing & layout */
+  --space-section: clamp(4rem, 6vw, 6rem);
+  --space-block: 2rem;
+  --gutter: clamp(1.5rem, 4vw, 2rem);
+  --container: 72rem;
+  --measure: 66ch;
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 9999px;
+
+  /* Font families (bound by next/font in _app.tsx) */
+  --font-display: var(--font-sora, 'Space Grotesk', sans-serif);
+  --font-sans: var(--font-inter, 'Inter', sans-serif);
+}
+
+/* ─────────────────────────────────────────────
+   TOKEN LAYER: dark — toggled via .dark on <html>
+   ───────────────────────────────────────────── */
+.dark {
+  --bg: #0B1020;
+  --fg: #EEF2FB;
+  --fg-muted: #A9B2C7;
+  --fg-subtle: #7B859C;
+  --surface: #141A2E;
+  --surface-raised: #1B2238;
+  --accent: #7C93FF;
+  --accent-fg: #0B1020;
+  --accent-hover: #9AACFF;
+  --success: #4ADE80;
+  --warning: #FBBF24;
+  --ring: #9AACFF;
+
+  --glass-bg: rgb(20 26 46 / 0.45);
+  --glass-bg-strong: rgb(16 20 34 / 0.66);
+  --glass-bg-chip: rgb(40 48 74 / 0.40);
+  --glass-border: rgb(255 255 255 / 0.12);
+  --glass-highlight: rgb(255 255 255 / 0.10);
+  --glass-shadow: 0 8px 30px rgb(0 0 0 / 0.45);
+  --glass-blur: 14px;
+  --glass-blur-strong: 20px;
+  --scrim: rgb(11 16 32 / 0.62);
+}
+
+/* ─────────────────────────────────────────────
+   GLASS UTILITY CLASSES (authored once, used everywhere)
+   No per-component backdrop-filter re-tuning allowed.
+   ───────────────────────────────────────────── */
+.glass {
+  background: var(--glass-bg);
+  -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(125%);
+  backdrop-filter: blur(var(--glass-blur)) saturate(125%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 0 var(--glass-highlight);
+  border-radius: var(--radius-lg);
+}
+
+.glass-strong {
+  background: var(--glass-bg-strong);
+  -webkit-backdrop-filter: blur(var(--glass-blur-strong)) saturate(125%);
+  backdrop-filter: blur(var(--glass-blur-strong)) saturate(125%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow), inset 0 1px 0 0 var(--glass-highlight);
+  border-radius: var(--radius-lg);
+}
+
+.glass-chip {
+  background: var(--glass-bg-chip);
+  -webkit-backdrop-filter: blur(8px) saturate(120%);
+  backdrop-filter: blur(8px) saturate(120%);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-pill);
+}
+
+/* Graceful fallback: browsers without backdrop-filter get opaque surfaces so
+   text never lands on a transparent layer over a photo (a11y). */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass        { background: var(--surface); }
+  .glass-strong { background: var(--surface-raised); }
+  .glass-chip   { background: var(--surface); }
+}
+
+/* ─────────────────────────────────────────────
+   REDUCED-MOTION GLOBAL GUARD
+   framer-motion entrances also gate on useReducedMotion()
+   ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   THEME TRANSITION (cross-fade on swap, disabled under reduced-motion)
+   ───────────────────────────────────────────── */
+html {
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
+/* ─────────────────────────────────────────────
+   BASE RESETS & TYPOGRAPHY
+   ───────────────────────────────────────────── */
+html, body {
   padding: 0;
   margin: 0;
-  font-family: "Roboto", sans-serif;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  line-height: 1.65;
 }
 
 a {
@@ -15,4 +165,61 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+/* Focus ring: visible for keyboard nav */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* ─────────────────────────────────────────────
+   CONTENT LIST — restores disc bullets that Tailwind Preflight resets
+   Apply to prose <ul>/<ol> only; chip/badge/nav rows must NOT use this.
+   ───────────────────────────────────────────── */
+.content-list {
+  list-style: disc outside;
+}
+.content-list::marker,
+.content-list > li::marker {
+  color: var(--fg-subtle);
+}
+
+/* ─────────────────────────────────────────────
+   ARCHITECTURE DIAGRAM — responsive scroll container (deep-dive pages)
+   Lives here, NOT in an inline component <style>, because React HTML-escapes
+   the ">" child combinator to "&gt;" during SSR, which caused a hydration
+   text mismatch. In a real stylesheet the ">" is parsed normally.
+   ───────────────────────────────────────────── */
+.diagram-scroll-wrapper {
+  border-radius: var(--radius-xl);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 1.5rem;
+  color: var(--fg);
+}
+.diagram-scroll-wrapper svg,
+.diagram-scroll-wrapper > * {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+.diagram-scroll-hint {
+  display: none;
+  font-size: var(--text-xs);
+  color: var(--fg-subtle);
+  margin-top: 0.5rem;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .diagram-scroll-wrapper svg,
+  .diagram-scroll-wrapper > * {
+    min-width: 760px;
+    width: auto;
+    max-width: none;
+  }
+  .diagram-scroll-hint {
+    display: block;
+  }
 }

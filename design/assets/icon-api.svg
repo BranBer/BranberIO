@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" fill="none"
+     stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"
+     role="img" aria-hidden="true">
+  <circle cx="14" cy="14" r="3.25" />
+  <circle cx="5" cy="6.5" r="2.25" />
+  <circle cx="23" cy="6.5" r="2.25" />
+  <circle cx="5" cy="21.5" r="2.25" />
+  <circle cx="23" cy="21.5" r="2.25" />
+  <line x1="6.9" y1="7.7" x2="11.6" y2="12.3" />
+  <line x1="21.1" y1="7.7" x2="16.4" y2="12.3" />
+  <line x1="6.9" y1="20.3" x2="11.6" y2="15.7" />
+  <line x1="21.1" y1="20.3" x2="16.4" y2="15.7" />
+</svg>
