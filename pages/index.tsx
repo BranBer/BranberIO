@@ -14,7 +14,7 @@ import { motion, useReducedMotion } from "framer-motion";
  * Rhythm: edge-to-edge asymmetric hero → single focal panel → selected work →
  * contact/close band. Four cadences, no repeat.
  *
- * ONE primary action above the fold: "View Résumé" CTA pill.
+ * ONE primary action above the fold: "Request résumé" CTA pill.
  * Hero is asymmetric (60/40 split), NOT a centered card.
  * All body copy sits on .glass-strong (tier-2). §3.2 a11y rule.
  */
@@ -335,9 +335,8 @@ const Home: NextPage = () => {
                 style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}
               >
                 <a
-                  href="/static/resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="mailto:brandonberke@gmail.com?subject=R%C3%A9sum%C3%A9%20request"
+                  aria-label="Request resume via email"
                   style={{
                     display: "inline-flex",
                     alignItems: "center",
@@ -361,7 +360,7 @@ const Home: NextPage = () => {
                     (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0)";
                   }}
                 >
-                  View Résumé
+                  Request résumé
                 </a>
 
                 {/* Secondary ghost CTA */}
@@ -805,7 +804,7 @@ const Home: NextPage = () => {
                 maxWidth: "var(--measure)",
               }}
             >
-              Open to full-stack and cloud-infra roles. Drop me a line or download
+              Open to full-stack and cloud-infra roles. Drop me a line or request
               my résumé — response within one business day.
             </motion.p>
 
@@ -814,9 +813,8 @@ const Home: NextPage = () => {
               style={{ display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center" }}
             >
               <a
-                href="/static/resume.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="mailto:brandonberke@gmail.com?subject=R%C3%A9sum%C3%A9%20request"
+                aria-label="Request resume via email"
                 style={{
                   display: "inline-flex",
                   alignItems: "center",
@@ -839,7 +837,7 @@ const Home: NextPage = () => {
                   (e.currentTarget as HTMLAnchorElement).style.transform = "translateY(0)";
                 }}
               >
-                Download Résumé
+                Request résumé
               </a>
 
               <a
